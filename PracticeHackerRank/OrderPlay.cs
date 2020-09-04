@@ -116,76 +116,53 @@ namespace PracticeHackerRank
 
         [Test]
         [TestCase(4, 2, ExpectedResult = "yes")]
-        [TestCase(3, 1, 2, ExpectedResult = "no")]
         [TestCase(1, 5, 4, 3, 2, 6, ExpectedResult = "yes")]
-        [TestCase(1,2,3,4,5,6,7,8,9,10,12,11, ExpectedResult = "yes")]
+        [TestCase(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 11, ExpectedResult = "yes")]
         public string almostSorted(params int[] arr)
         {
+            int fromFront = 0;
 
-            int dips = 0;
-            int ups = 0;
+            int fromBack = 0;
 
-            List<int> dipIndex = new List<int>();
-            List<int> upsIndex = new List<int>();
-
-            //first Guy
-            if (arr[0] > arr[1])
+            for (int i = 0; i < arr.Length - 1; i++)
             {
-                dips++;
-                dipIndex.Add(0);
-            }
-            else
-            {
-                ups++;
-                upsIndex.Add(0);
-            }
-
-            //last
-            if (arr[arr.Count() - 1] > arr[arr.Count() - 2])
-            {
-                dips++;
-                dipIndex.Add(arr.Count() - 1);
-            }
-            else
-            {
-                ups++;
-                upsIndex.Add(arr.Count() - 1);
-            }
-
-            for (int i = 1; i < arr.Count() - 1; i++)
-            {
-                if (arr[i] > arr[i - 1] && arr[i] > arr[i + 1])
+                if (arr[i] > arr[i + 1])
                 {
-                    //dips
-                    dips++;
-                    dipIndex.Add(i);
-                }
-                else if (arr[i] < arr[i - 1] && arr[i] < arr[i + 1])
-                {
-                    ups++;
-                    upsIndex.Add(i);
+                    fromFront = i;
+                    break;
                 }
             }
 
-            if (dips == ups && dips <= 2)
+            int z = -1;
+  
+            for (int j = arr.Length - 1; j > 0; j--)
             {
-                Console.WriteLine("yes");
-                if (dips == 1)
+                z++;
+                // 
+                if (arr[j] < arr[j - 1])
                 {
-                    Console.WriteLine($"swap {dipIndex.FirstOrDefault() + 1} {upsIndex.FirstOrDefault() + 1}");
+                    fromBack = z;
+                    break;
                 }
-                else
-                {
-                    Console.WriteLine($"reverse {dipIndex[1] + 1} {dipIndex[0]}");
-                }
+            }
 
-                return "yes";
-            }
-            else
+            List<int> middleList = arr.Skip(fromFront).Take(arr.Length - fromFront - fromBack).ToList();
+
+            if (middleList?.Any() ?? false)
             {
-                Console.WriteLine("no");
-                return "no";
+                if (middleList.SequenceEqual(middleList.OrderBy(x => x)))
+                {
+                    //swap
+                    return "yes";
+                }
+                else if (middleList.SequenceEqual(middleList.OrderByDescending(x => x)))
+                {
+                    //reverse
+                    return "yes";
+                }
             }
+
+            return "no";
         }
 
 
