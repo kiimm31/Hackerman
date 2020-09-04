@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using NuGet.Frameworks;
+using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -326,6 +327,136 @@ namespace PracticeHackerRank
         }
         #endregion
 
+        #region GridSearch
 
+        [Test]
+        [TestCaseSource(nameof(gridSearchCases))]
+        public void gridSearch(string[] G, string[] P, string expectResult)
+        {
+            string returnString = "NO";
+
+            for (int gFirst = 0; gFirst < G.Length; gFirst++)
+            {
+                int gIndex = gFirst;
+                List<List<int>> listOfIndex = new List<List<int>>();
+
+                for (int pIndex = 0; pIndex < P.Length; pIndex++)
+                {
+                    string controlString = G[gIndex];
+                    if (controlString.Contains(P[pIndex]) && gIndex < G.Length)
+                    {
+                        listOfIndex.Add(AllIndexesOf(G[gIndex], P[pIndex]));
+                        gIndex++;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+
+                if (listOfIndex.Count() == P.Length)
+                {
+                    // ascending row contains P
+                    // check if all list contains a same number
+                    List<int> commonList = FindCommon<int>(listOfIndex);
+
+                    if (commonList?.Any() ?? false)
+                    {
+                        returnString = "YES";
+                        break;
+                    }
+                }
+            }
+
+            Assert.AreEqual(returnString, expectResult);
+        }
+
+        public List<T> FindCommon<T>(IEnumerable<List<T>> Lists)
+        {
+            return Lists.SelectMany(x => x).Distinct()
+                .Where(x => Lists.Select(y => (y.Contains(x) ? 1 : 0))
+                .Sum() == Lists.Count()).ToList();
+        }
+
+        public List<int> AllIndexesOf(string str, string value)
+        {
+            if (String.IsNullOrEmpty(value))
+                throw new ArgumentException("the string to find may not be empty", "value");
+            List<int> indexes = new List<int>();
+            for (int index = 0; index <= str.Length - value.Length; index++)
+            {
+                index = str.IndexOf(value, index);
+                if (index == -1)
+                    return indexes;
+                indexes.Add(index);
+            }
+            return indexes;
+        }
+
+        static object[] gridSearchCases =
+        {
+            new object[]
+            {
+                 new string[]
+                 {
+                     "7283455864",
+                     "6731158619",
+                     "8988242643",
+                     "3830589324",
+                     "2229505813",
+                     "5633845374",
+                     "6473530293",
+                     "7053106601",
+                     "0834282956",
+                     "4607924137"
+                 },
+                 new string[]
+                 {
+                     "9505",
+                     "3845",
+                     "3530"
+                 },
+                 "YES"
+            },
+
+            new object[]
+            {
+                new string[]
+                {
+                    "123412",
+                    "561212",
+                    "123634",
+                    "781288"
+                },
+                new string[]
+                {
+                    "12",
+                    "34"
+                }
+                , "YES"
+            },
+            new object[]
+            {
+                new string[]
+                {
+                    "111111111111111",
+                    "111111111111111",
+                    "111111011111111",
+                    "111111111111111",
+                    "111111111111111"
+                },
+                new string[]
+                {
+                    "11111",
+                    "11111",
+                    "11110"
+                },
+                "YES"
+            },
+
+
+        };
+
+        #endregion
     }
 }

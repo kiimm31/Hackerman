@@ -240,6 +240,28 @@ namespace PracticeHackerRank
             }
         };
 
+        [Test]
+        [TestCase("31415926535897932384626433832795", "1", "3", "10", "3", "5", ExpectedResult = new string[] { "1", "3", "3", "5", "10", "31415926535897932384626433832795" })]
+        public string[] bigSorting(params string[] unsorted)
+        {
+            List<BigInteger> bigIntegers = new List<BigInteger>();
+
+            unsorted.ToList().ForEach(x =>
+            {
+                bigIntegers.Add(BigInteger.Parse(x));
+            });
+
+            bigIntegers = bigIntegers.OrderBy(x => x).ToList();
+
+            List<string> returnString = new List<string>();
+
+            bigIntegers.ForEach(x =>
+            {
+                returnString.Add(x.ToString());
+            });
+
+            return returnString.ToArray();
+        }
 
     }
 }

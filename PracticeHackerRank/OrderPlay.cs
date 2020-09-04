@@ -186,7 +186,6 @@ namespace PracticeHackerRank
                 Console.WriteLine("no");
                 return "no";
             }
-
         }
 
 
