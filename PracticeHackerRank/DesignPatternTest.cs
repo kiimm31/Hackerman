@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using DecoratorPattern;
+using DesignPattern;
 using NUnit.Framework;
 
 namespace PracticeHackerRank
@@ -11,7 +11,7 @@ namespace PracticeHackerRank
         [Test]
         public void DecoratorPattern()
         {
-            DecoratorPattern.DecoratorPattern implementation = new DecoratorPattern.DecoratorPattern();
+            DecoratorPattern implementation = new DecoratorPattern();
 
             implementation.CreateDrink();
 
