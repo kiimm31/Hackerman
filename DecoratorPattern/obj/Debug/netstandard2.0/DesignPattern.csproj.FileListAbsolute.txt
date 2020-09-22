@@ -1,9 +1,0 @@
-C:\github\Hackerman\DecoratorPattern\bin\Debug\netstandard2.0\DesignPattern.deps.json
-C:\github\Hackerman\DecoratorPattern\bin\Debug\netstandard2.0\DesignPattern.dll
-C:\github\Hackerman\DecoratorPattern\bin\Debug\netstandard2.0\DesignPattern.pdb
-C:\github\Hackerman\DecoratorPattern\obj\Debug\netstandard2.0\DesignPattern.csprojAssemblyReference.cache
-C:\github\Hackerman\DecoratorPattern\obj\Debug\netstandard2.0\DesignPattern.AssemblyInfoInputs.cache
-C:\github\Hackerman\DecoratorPattern\obj\Debug\netstandard2.0\DesignPattern.AssemblyInfo.cs
-C:\github\Hackerman\DecoratorPattern\obj\Debug\netstandard2.0\DesignPattern.csproj.CoreCompileInputs.cache
-C:\github\Hackerman\DecoratorPattern\obj\Debug\netstandard2.0\DesignPattern.dll
-C:\github\Hackerman\DecoratorPattern\obj\Debug\netstandard2.0\DesignPattern.pdb
