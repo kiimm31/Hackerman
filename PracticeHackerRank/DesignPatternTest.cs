@@ -26,5 +26,13 @@ namespace PracticeHackerRank
             Assert.AreEqual(drinkCost, 2);
         }
 
+        [Test]
+        public void TemplatePattern()
+        {
+            TemplateMethodPattern templateMethodPattern = new TemplateMethodPattern();
+
+            templateMethodPattern.Save();
+        }
+
     }
 }
