@@ -458,5 +458,89 @@ namespace PracticeHackerRank
         };
 
         #endregion
+
+        public static void fizzBuzz(int n)
+        {
+            for (int integer = 1; integer <= n; integer++)
+            {
+                string returnString = string.Empty;
+
+                if (integer % 3 == 0)
+                {
+                    //can divide by 3
+                    returnString += "Fizz";
+                }
+                if (integer % 5 == 0)
+                {
+                    //can divide by 5
+                    returnString += "Buzz";
+                }
+
+                if (string.IsNullOrWhiteSpace(returnString))
+                {
+                    Console.WriteLine(integer.ToString());
+                }
+                else
+                {
+                    Console.WriteLine(returnString);
+                }
+            }
+
+        }
+
+        [Test]
+        [TestCase("[]([][)[[)[((])(((]][()(()))])][[)]([]])", ExpectedResult = 1)]
+        [TestCase("[(?][??[", ExpectedResult = 2)]
+        [TestCase("?)(])?", ExpectedResult = 2)]
+        public int fillMissingBrackets(string s)
+        {
+            int numberOfRound = 0;
+            int numberOfSquare = 0;
+            int numberofUnknown = 0;
+
+            int counter = 0;
+
+            foreach (char item in s)
+            {
+                switch (item)
+                {
+                    case '(':
+                        numberOfRound++;
+                        break;
+                    case ')':
+                        numberOfRound--;
+                        break;
+                    case '[':
+                        numberOfSquare++;
+                        break;
+                    case ']':
+                        numberOfSquare--;
+                        break;
+                    case '?':
+                        numberofUnknown++;
+                        break;
+                    default:
+                        break;
+                }
+
+                if ((numberOfRound - numberofUnknown) <= 0)
+                {
+                    int tempUnknownLeft = (numberofUnknown - Math.Abs(numberOfRound));
+                    if (numberOfSquare - tempUnknownLeft == 0)
+                    {
+                        counter++;
+                        numberofUnknown = 0;
+                    }
+                }
+            }
+
+            if (counter > 2 && counter > 0)
+            {
+                return counter > 2 ? (int)Math.Ceiling((double)counter / 2) : 1;
+            }
+            else
+                return 0;
+        }
+
     }
 }

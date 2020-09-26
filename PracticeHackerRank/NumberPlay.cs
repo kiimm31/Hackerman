@@ -1,6 +1,8 @@
 ﻿using NUnit.Framework;
+using NUnit.Framework.Constraints;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Numerics;
 using System.Text;
@@ -262,6 +264,86 @@ namespace PracticeHackerRank
 
             return returnString.ToArray();
         }
+
+        [Test]
+        [TestCase(14, 1, ExpectedResult = 6)]
+        public int ways(int total, int k)
+        {
+            List<int> numbersAvailable = new List<int>();
+
+            for (int i = 1; i <= k; i++) // max numbers available
+            {
+                numbersAvailable.Add(i);
+            }
+
+            int[] arr = new int[] { 12, 3, 1, 9 };
+
+            int[] count = new int[total + 1];
+
+            // base case 
+            count[0] = 1;
+
+            // count ways for all values up  
+            // to 'N' and store the result 
+            for (int i = 1; i <= total; i++)
+                for (int j = 0; j < arr.Length; j++)
+
+                    // if i >= arr[j] then 
+                    // accumulate count for value 'i' as 
+                    // ways to form value 'i-arr[j]' 
+                    if (i >= arr[j])
+                        count[i] += count[i - arr[j]];
+
+            // required number of ways  
+            return count[total];
+        }
+        [Test]
+        [TestCase(200, 405, ExpectedResult = 4)]
+        [TestCase(400000, 500000, ExpectedResult = 3)]
+        public long getIdealNums(long low, long high)
+        {
+            List<long> threeList = getListOfLongPower(high, 3);
+            List<long> fiveList = getListOfLongPower(high, 5);
+
+            List<long> answer = new List<long>();
+
+            foreach (var three in threeList)
+            {
+                foreach (var five in fiveList)
+                {
+                    long value = three * five;
+
+                    if (value >= low && value <= high)
+                    {
+                        // within range
+                        answer.Add(value);
+                    }
+                }
+            }
+
+            return answer.Count();
+        }
+
+        private List<long> getListOfLongPower(long high, int basePower)
+        {
+            List<long> returnList = new List<long>();
+
+            for (int i = 0; i < high; i++)
+            {
+                double power = Math.Pow(basePower, i);
+                if (power <= high)
+                {
+                    returnList.Add((long)power);
+                }
+                else
+                {
+                    break;
+                }
+            }
+
+            return returnList;
+        }
+
 
     }
 }

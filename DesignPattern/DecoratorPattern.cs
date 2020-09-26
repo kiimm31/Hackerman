@@ -60,4 +60,60 @@ namespace DesignPattern
             return Beverage.GetCost();
         }
     }
+
+
+    public abstract class Car
+    {
+        protected bool isSedan;
+        protected string seats;
+
+        public Car() { }
+
+        public Car(bool isSedan, string seats)
+        {
+            this.isSedan = isSedan;
+            this.seats = seats;
+        }
+
+        public bool getIsSedan()
+        {
+            return this.isSedan;
+        }
+
+        public string getSeats()
+        {
+            return this.seats;
+        }
+
+        abstract public string getMileage();
+
+        public void printCar(string name)
+        {
+            Console.WriteLine("A {0} is{1} Sedan, is {2}-seater, and has a mileage of around {3}.",
+            name,
+            this.getIsSedan() ? "" : " not",
+            this.getSeats(),
+            this.getMileage());
+        }
+    }
+
+
+    public class WagonR : Car
+    {
+        private readonly int _mileage;
+
+        public override string getMileage()
+        {
+            return $"{_mileage} kmpl";
+        }
+
+        public WagonR(int mileage)
+        {
+            _mileage = mileage;
+            base.isSedan = false;
+            base.seats = 4.ToString();
+        }
+    }
+
+    
 }

@@ -111,7 +111,6 @@ namespace PracticeHackerRank
 
         #endregion
 
-
         #region AlmostSored
 
         [Test]
@@ -134,7 +133,7 @@ namespace PracticeHackerRank
             }
 
             int z = -1;
-  
+
             for (int j = arr.Length - 1; j > 0; j--)
             {
                 z++;
@@ -168,6 +167,32 @@ namespace PracticeHackerRank
 
         #endregion
 
+        [Test]
+        [TestCase(3, 4, 1, 2, ExpectedResult = 2)]
+        [TestCase(3, 3, 1, 2, ExpectedResult = 1)]
+        public int MinimumSwap(params int[] arr)
+        {
+            List<int> popularity = arr.ToList();
 
+            List<int> answer = popularity.OrderByDescending(x => x).ToList();
+            int counter = 0;
+            int temp = 0;
+            for (int i = 0; i < popularity.Count(); i++)
+            {
+                if (answer[i] != popularity[i])
+                {// needs a swap
+                    counter++;
+                    int newIndex = popularity.IndexOf(answer[i]);
+
+                    temp = popularity[i];
+                    popularity[i] = popularity[newIndex];
+                    popularity[newIndex] = temp;
+
+                    i = 0; //start from beginning
+                }
+            }
+
+            return counter;
+        }
     }
 }

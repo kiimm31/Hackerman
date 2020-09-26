@@ -34,5 +34,15 @@ namespace PracticeHackerRank
             templateMethodPattern.Save();
         }
 
+
+        [Test]
+        public void hello()
+        {
+            Car car = new WagonR(5);
+
+            car.getMileage();
+
+            car.printCar("WagonR");
+        }
     }
 }
