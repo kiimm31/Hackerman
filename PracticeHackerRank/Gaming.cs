@@ -141,8 +141,44 @@ namespace PracticeHackerRank
         }
         #endregion
 
+        [Test]
+        [TestCase(0, 0, 0, 0, 1, 0, ExpectedResult = 3)]
+        public int cloudJump(params int[] c)
+        {
+            int jumpCount = 0;
 
+            int currentIndex = 0;
 
+            while (currentIndex < c.Length)
+            {
+                // jump before cloud
+                int nextThunderCloudIndex = c.ToList().IndexOf(1, currentIndex);
+
+                if (nextThunderCloudIndex == -1)
+                {// no more cloud
+                    // jump to end
+                    int stepsJump = c.Length - 1 - currentIndex;
+
+                    jumpCount = jumpCount + (int)Math.Ceiling((double)stepsJump / 2);
+                    break;
+                }
+                else
+                {
+                    int stepsJump = nextThunderCloudIndex - 1 - currentIndex;
+
+                    jumpCount = jumpCount + (int)Math.Ceiling((double)stepsJump / 2);
+
+                    currentIndex = nextThunderCloudIndex - 1;
+
+                    // jump to after cloud
+                    jumpCount++;
+
+                    currentIndex = currentIndex + 2;
+                }
+            }
+
+            return jumpCount;
+        }
 
     }
 }

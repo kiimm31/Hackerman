@@ -542,5 +542,49 @@ namespace PracticeHackerRank
                 return 0;
         }
 
+
+        [Test]
+        [TestCase("RBY_YBR", ExpectedResult = "YES")]
+        [TestCase("X_Y__X", ExpectedResult = "NO")]
+        [TestCase("__", ExpectedResult = "YES")]
+        [TestCase("B_RRBR", ExpectedResult = "YES")]
+        [TestCase("AABBC", ExpectedResult = "NO")]
+        [TestCase("AABBC_C", ExpectedResult = "YES")]
+        [TestCase("DD__FQ_QQF", ExpectedResult = "YES")]
+        [TestCase("AABCBC", ExpectedResult = "NO")]
+        public string happyLadybugs(string s)
+        {
+            if (s.Contains("_"))
+            {// only needs to know if every letter more than 2
+                IEnumerable<IGrouping<char, char>> letters = s.Replace("_", "").GroupBy(x => x);
+
+                if (letters.Any(x => x.Count() <= 1))
+                {
+                    return "NO";
+                }
+            }
+            else
+            {// need to know if every letter is next to itself
+                List<Tuple<char, int>> tuple = new List<Tuple<char, int>>();
+                foreach (char _char in s)
+                {
+                    if (tuple.LastOrDefault()?.Item1 == _char)
+                    {
+                        tuple[tuple.Count() - 1] = new Tuple<char, int>(_char, tuple.LastOrDefault().Item2 + 1);
+                    }
+                    else
+                    {// previously already have some char not next to each other
+                        tuple.Add(new Tuple<char, int>(_char, 1));
+                    }
+                }
+
+                if (tuple.Any(x => x.Item2 <= 1))
+                {
+                    return "NO";
+                }
+            }
+
+            return "YES";
+        }
     }
 }
