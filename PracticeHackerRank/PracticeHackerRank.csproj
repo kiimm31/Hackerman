@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\DatabasePractice\DatabasePractice.csproj" />
     <ProjectReference Include="..\DesignPattern\DesignPattern.csproj" />
   </ItemGroup>
 
