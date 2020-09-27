@@ -220,7 +220,6 @@ namespace PracticeHackerRank
 
         #endregion
 
-
         #region VowelCount
         [Test]
         [TestCase("caberqiitefg", 5, ExpectedResult = "erqii")]

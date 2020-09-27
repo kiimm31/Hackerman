@@ -13,6 +13,14 @@ namespace PracticeHackerRank
         public void sqliteTest()
         {
             SQLite sQLite = new SQLite(@"C:\Users\KimHung\Documents\Test.db");
+
+            string password = "thisIsMyPassword";
+
+            string hashed = sQLite.EncryptString(password);
+
+            string unHashed = sQLite.DecryptString(hashed);
+
+            Assert.AreEqual(unHashed, password);
         }
     }
 }

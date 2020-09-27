@@ -28,5 +28,28 @@ namespace DatabasePractice
                 }
             }
         }
+
+        public string EncryptString(string unHashed)
+        {
+            byte[] b = System.Text.ASCIIEncoding.ASCII.GetBytes(unHashed);
+            string encrypted = Convert.ToBase64String(b);
+            return encrypted;
+        }
+
+        public string DecryptString(string hashed)
+        {
+            byte[] b;
+            string decrypted;
+            try
+            {
+                b = Convert.FromBase64String(hashed);
+                decrypted = System.Text.ASCIIEncoding.ASCII.GetString(b);
+            }
+            catch (FormatException fe)
+            {
+                decrypted = "";
+            }
+            return decrypted;
+        }
     }
 }
