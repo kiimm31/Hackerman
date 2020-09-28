@@ -61,7 +61,6 @@ namespace DesignPattern
         }
     }
 
-
     public abstract class Car
     {
         protected bool isSedan;
