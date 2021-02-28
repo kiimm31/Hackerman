@@ -1,5 +1,4 @@
-﻿using CSharpFunctionalExtensions;
-using MediatR;
+﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
@@ -31,6 +30,14 @@ namespace TestApi.Controllers
             {
                 Error = result.Error
             };
+        }
+
+        [HttpPost]
+        [Route("Notify")]
+        public async Task<bool> SendNotificationAsync(NotifiyRequest request)
+        {
+            await _mediator.Publish(request);
+            return true;
         }
     }
 }

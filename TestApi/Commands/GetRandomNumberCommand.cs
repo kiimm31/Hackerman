@@ -1,18 +1,16 @@
 ﻿using CSharpFunctionalExtensions;
 using MediatR;
-using Microsoft.Extensions.Logging;
+using Polly.Retry;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using TestApi.Models;
-using Polly.Retry;
 using TestApi.Extensions;
+using TestApi.Models;
 
 namespace TestApi.Commands
 {
     public class GetRandomNumberCommand : IRequest<Result<RandomNumberDTO>>
     {
-
     }
 
     public class GetRandomNumberCommandHandler : IRequestHandler<GetRandomNumberCommand, Result<RandomNumberDTO>>
@@ -26,6 +24,7 @@ namespace TestApi.Commands
         {
             _httpClientFactory = httpClientFactory;
         }
+
         public async Task<Result<RandomNumberDTO>> Handle(GetRandomNumberCommand request, CancellationToken cancellationToken)
         {
             using (var client = _httpClientFactory.CreateClient())
@@ -51,7 +50,6 @@ namespace TestApi.Commands
                 else
                     return Result.Failure<RandomNumberDTO>($"Polly Retry Failed {policyResult.FinalException.GetBaseException().Message}");
             }
-
         }
     }
 }
