@@ -5,6 +5,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using TestApi.Commands;
+using TestApi.Interfaces;
+using TestApi.Services;
 
 namespace TestApi
 {
@@ -25,6 +27,9 @@ namespace TestApi
             services.AddMediatR(typeof(Startup));
             services.AddSwaggerGen();
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingCommand<,>));
+
+            services.AddHostedService<QueueService>();
+            services.AddSingleton<IEventQueue,EventQueue>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
