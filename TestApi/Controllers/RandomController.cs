@@ -1,9 +1,9 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
 using TestApi.Commands;
-using TestApi.Models;
+using TestApi.Notification;
+using TestApi.Services;
 
 namespace TestApi.Controllers
 {
@@ -11,13 +11,13 @@ namespace TestApi.Controllers
     [Route("api/[controller]")]
     public class RandomController : ControllerBase
     {
-        private readonly ILogger<RandomController> _logger;
         private readonly IMediator _mediator;
+        private readonly CapPublishService _capPublisher;
 
-        public RandomController(ILogger<RandomController> logger, IMediator mediator)
+        public RandomController(IMediator mediator, CapPublishService capPublisher)
         {
-            _logger = logger;
             _mediator = mediator;
+            _capPublisher = capPublisher;
         }
 
         [HttpGet]
@@ -25,13 +25,12 @@ namespace TestApi.Controllers
         public async Task<string> GetRandomStringAsync()
         {
             var result = await _mediator.Send(new GetRandomNumberCommand());
-
             return result.IsSuccess ? $"RandomString : {result.Value}" : $"ERROR : {result.Error}";
         }
 
         [HttpPost]
         [Route("Notify")]
-        public async Task<bool> SendNotificationAsync(NotifiyRequest request)
+        public async Task<bool> SendNotificationAsync(NotifyRequest request)
         {
             await _mediator.Publish(request);
             return true;
@@ -43,6 +42,15 @@ namespace TestApi.Controllers
         {
             var result = await _mediator.Send(eventRequest);
             return result.IsSuccess;
+        }
+
+        [HttpPost]
+        [Route("CAP")]
+        public async Task<bool> PublishEvent(QueueEventCommand eventRequest)
+        {
+            await _capPublisher.PublishAsync(eventRequest.Event);
+            
+            return true;
         }
     }
 }

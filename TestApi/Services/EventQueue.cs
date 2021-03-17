@@ -7,7 +7,7 @@ namespace TestApi.Services
 {
     public class EventQueue : IEventQueue
     {
-        private ConcurrentQueue<IEventArgs> _workItems =
+        private readonly ConcurrentQueue<IEventArgs> _workItems =
             new ConcurrentQueue<IEventArgs>();
 
         private SemaphoreSlim _signal = new SemaphoreSlim(0);

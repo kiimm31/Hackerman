@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Savorboard.CAP.InMemoryMessageQueue;
 using TestApi.Commands;
 using TestApi.Interfaces;
 using TestApi.Services;
@@ -28,8 +29,20 @@ namespace TestApi
             services.AddSwaggerGen();
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingCommand<,>));
 
+            services.AddCap(options =>
+            {
+                options.FailedRetryCount = 3;
+                options.FailedRetryInterval = 60;
+                options.UseInMemoryStorage();
+                options.UseInMemoryMessageQueue();
+                options.UseDashboard();
+            });
+
+
             services.AddHostedService<QueueService>();
+            services.AddHostedService<CapMonitorService>();
             services.AddSingleton<IEventQueue,EventQueue>();
+            services.AddSingleton<CapPublishService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

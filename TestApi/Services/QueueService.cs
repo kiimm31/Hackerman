@@ -5,6 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using TestApi.Commands;
 using TestApi.Interfaces;
+using TestApi.Models;
 
 namespace TestApi.Services
 {
@@ -29,17 +30,24 @@ namespace TestApi.Services
                     await _queue.DequeueAsync(stoppingToken);
                 if (workItem != null)
                 {
-                    var result = await _mediator.Send(new GetRandomNumberCommand(), stoppingToken);
-
-                    if (result.IsSuccess)
+                    switch (workItem.GetType().Name)
                     {
-                        _logger.LogInformation($"{workItem.RequestDateTime.ToLocalTime()} : {result.Value}");
-                    }
-                    else
-                    {
-                        _logger.LogError(result.Error);
-                    }
+                        case nameof(RandomEventArgs):
+                            var result = await _mediator.Send(new GetRandomNumberCommand(), stoppingToken);
 
+                            if (result.IsSuccess)
+                            {
+                                _logger.LogInformation($"{workItem.RequestDateTime.ToLocalTime()} : {result.Value}");
+                            }
+                            else
+                            {
+                                _logger.LogError(result.Error);
+                            }
+                            break;
+                        default:
+                            _logger.LogError($"Unhandled Event Type {workItem.GetType().Name}");
+                            break;
+                    }
                 }
             }
         }
