@@ -22,14 +22,11 @@ namespace TestApi.Controllers
 
         [HttpGet]
         [Route("Random")]
-        public async Task<RandomNumberDTO> GetRandomStringAsync()
+        public async Task<string> GetRandomStringAsync()
         {
             var result = await _mediator.Send(new GetRandomNumberCommand());
 
-            return result.IsSuccess ? result.Value : new RandomNumberDTO()
-            {
-                Error = result.Error
-            };
+            return result.IsSuccess ? $"RandomString : {result.Value}" : $"ERROR : {result.Error}";
         }
 
         [HttpPost]
@@ -38,6 +35,14 @@ namespace TestApi.Controllers
         {
             await _mediator.Publish(request);
             return true;
+        }
+
+        [HttpPost]
+        [Route("Queue")]
+        public async Task<bool> QueueEvent(QueueEventCommand eventRequest)
+        {
+            var result = await _mediator.Send(eventRequest);
+            return result.IsSuccess;
         }
     }
 }

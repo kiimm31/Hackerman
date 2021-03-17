@@ -5,51 +5,45 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using TestApi.Extensions;
-using TestApi.Models;
 
 namespace TestApi.Commands
 {
-    public class GetRandomNumberCommand : IRequest<Result<RandomNumberDTO>>
+    public class GetRandomNumberCommand : IRequest<Result<string>>
     {
     }
 
-    public class GetRandomNumberCommandHandler : IRequestHandler<GetRandomNumberCommand, Result<RandomNumberDTO>>
+    public class GetRandomNumberCommandHandler : IRequestHandler<GetRandomNumberCommand, Result<string>>
     {
         private readonly IHttpClientFactory _httpClientFactory;
-        private AsyncRetryPolicy _polly = RetryPolicies.GenericRetryPolicy(3, 3);
+        private readonly AsyncRetryPolicy _polly = RetryPolicies.GenericRetryPolicy(3, 3);
 
-        private static string _randomStringApiUrl => "https://www.random.org/strings/?num=1&len=8&digits=on&upperalpha=on&loweralpha=on&unique=on&format=plain&rnd=new";
+        private static string RandomStringApiUrl => "https://www.random.org/strings/?num=1&len=8&digits=on&upperalpha=on&loweralpha=on&unique=on&format=plain&rnd=new";
 
         public GetRandomNumberCommandHandler(IHttpClientFactory httpClientFactory)
         {
             _httpClientFactory = httpClientFactory;
         }
 
-        public async Task<Result<RandomNumberDTO>> Handle(GetRandomNumberCommand request, CancellationToken cancellationToken)
+        public async Task<Result<string>> Handle(GetRandomNumberCommand request, CancellationToken cancellationToken)
         {
-            using (var client = _httpClientFactory.CreateClient())
-            {
-                var policyResult = await _polly.ExecuteAndCaptureAsync(async () => await client.GetAsync(_randomStringApiUrl));
+            using var client = _httpClientFactory.CreateClient();
+            var policyResult = await _polly.ExecuteAndCaptureAsync(async () => await client.GetAsync(RandomStringApiUrl, cancellationToken));
 
-                if (policyResult.Outcome == Polly.OutcomeType.Successful)
+            if (policyResult.Outcome == Polly.OutcomeType.Successful)
+            {
+                var httpResponse = policyResult.Result;
+                if (httpResponse.IsSuccessStatusCode)
                 {
-                    var httpResponse = policyResult.Result;
-                    if (httpResponse.IsSuccessStatusCode)
-                    {
-                        var returnModel = new RandomNumberDTO()
-                        {
-                            RandomString = await httpResponse.Content.ReadAsStringAsync()
-                        };
-                        return Result.Success<RandomNumberDTO>(returnModel);
-                    }
-                    else
-                    {
-                        return Result.Failure<RandomNumberDTO>($"Failed to call {_randomStringApiUrl} : {httpResponse.StatusCode} ; {httpResponse.ReasonPhrase}");
-                    }
+                    var randomString = await httpResponse.Content.ReadAsStringAsync();
+                    return Result.Success<string>(randomString);
                 }
                 else
-                    return Result.Failure<RandomNumberDTO>($"Polly Retry Failed {policyResult.FinalException.GetBaseException().Message}");
+                {
+                    return Result.Failure<string>($"Failed to call {RandomStringApiUrl} : {httpResponse.StatusCode} ; {httpResponse.ReasonPhrase}");
+                }
             }
+            else
+                return Result.Failure<string>($"Polly Retry Failed {policyResult.FinalException.GetBaseException().Message}");
         }
     }
 }
