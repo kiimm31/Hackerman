@@ -30,7 +30,7 @@ namespace TestApi.Commands
         {
             var dto = _mapper.Map<OcrRequest>(request);
 
-            var extractWordFromImage = await Task.FromResult<Result<string>>(ImageHelper.ExtractWordFromImage(dto));
+            var extractWordFromImage = await Task.FromResult(ImageHelper.ExtractWordFromImage(dto));
 
             return extractWordFromImage;
         }
