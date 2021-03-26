@@ -1,6 +1,8 @@
-﻿using System;
+﻿using CSharpFunctionalExtensions;
+using System;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.IO;
 using Tesseract;
 using TestApi.Models.Dto;
 
@@ -8,7 +10,7 @@ namespace TestApi.Helpers
 {
     public class ImageHelper
     {
-        public static string ExtractWordFromImage(OcrRequest request)
+        public static Result<string> ExtractWordFromImage(OcrRequest request)
         {
             Image myImage = WindowsHelper.CaptureWindowByName(request.ProcessName, new Rectangle(request.ImageXCoordinate, request.ImageYCoordinate, request.ImageWidth, request.ImageHeight));
             var imageAttr = new ImageAttributes();
@@ -37,13 +39,15 @@ namespace TestApi.Helpers
                 }
             }
 
-            bm.Save(@"D:\\tmp.jpg");
+            var fp = $"{Path.GetTempPath()}{Guid.NewGuid()}.jpg";
+
+            bm.Save(fp);
             var word = new TesseractEngine($"{new System.IO.DirectoryInfo(Environment.CurrentDirectory).FullName}\\tessdata\\",
                                                 "eng",
                                                 EngineMode.Default).Process(Pix.LoadFromFile(@"D:\\tmp.jpg"))
                                                                    .GetText()
                                                                    .Replace("\n", " ");
-            return word;
+            return Result.SuccessIf<string>(!string.IsNullOrWhiteSpace(word), word, $"No words readable, image saved in {fp}");
         }
     }
 }

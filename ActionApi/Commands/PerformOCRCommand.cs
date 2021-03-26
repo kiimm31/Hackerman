@@ -29,10 +29,10 @@ namespace TestApi.Commands
         public async Task<Result<string>> Handle(PerformOcrCommand request, CancellationToken cancellationToken)
         {
             var dto = _mapper.Map<OcrRequest>(request);
-            var extractWordFromImage = ImageHelper.ExtractWordFromImage(dto);
 
-            return Result.SuccessIf(!string.IsNullOrWhiteSpace(extractWordFromImage), extractWordFromImage,
-                "No Words detected in image");
+            var extractWordFromImage = await Task.FromResult<Result<string>>(ImageHelper.ExtractWordFromImage(dto));
+
+            return extractWordFromImage;
         }
     }
 }

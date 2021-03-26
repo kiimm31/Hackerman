@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using ActionApi.Commands;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using TestApi.Commands;
@@ -60,6 +61,15 @@ namespace TestApi.Controllers
             var result = await _mediator.Send(request);
 
             return result.IsSuccess ? result.Value : result.Error;
+        }
+
+        [HttpPost]
+        [Route("Fuzzy")]
+        public async Task<int> Fuzzy(FuzzyStringComparisonCommand command)
+        {
+            var result = await _mediator.Send(command);
+
+            return result.IsSuccess ? result.Value : 0;
         }
 
     }

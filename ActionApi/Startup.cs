@@ -8,6 +8,7 @@ using Savorboard.CAP.InMemoryMessageQueue;
 using TestApi.Commands;
 using TestApi.Interfaces;
 using TestApi.Services;
+using Serilog;
 
 namespace TestApi
 {
@@ -65,6 +66,8 @@ namespace TestApi
             });
 
             app.UseSwagger();
+
+            app.UseSerilogRequestLogging();
 
             // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.),
             // specifying the Swagger JSON endpoint.
