@@ -17,7 +17,7 @@ namespace TestApi.Helpers
         {
             var rect = new Rect();
             GetWindowRect(handle, ref rect);
-            Rectangle bounds = new Rectangle(rect.Left, rect.Top, rect.Right - rect.Left, rect.Bottom - rect.Top);
+            var bounds = new Rectangle(rect.Left, rect.Top, rect.Right - rect.Left, rect.Bottom - rect.Top);
             var result = new Bitmap(bounds.Width, bounds.Height);
 
             using (var graphics = Graphics.FromImage(result))
@@ -25,18 +25,14 @@ namespace TestApi.Helpers
                 graphics.CopyFromScreen(new Point(bounds.Left, bounds.Top), Point.Empty, bounds.Size);
             }
 
-            if (cropArea == Rectangle.Empty) return result;
-
-            return cropAtRect(result, cropArea);
+            return cropArea == Rectangle.Empty ? result : cropAtRect(result, cropArea);
         }
         public static Bitmap cropAtRect(Bitmap b, Rectangle r)
         {
-            Bitmap nb = new Bitmap(r.Width, r.Height);
-            using (Graphics g = Graphics.FromImage(nb))
-            {
-                g.DrawImage(b, -r.X, -r.Y);
-                return nb;
-            }
+            var nb = new Bitmap(r.Width, r.Height);
+            using var g = Graphics.FromImage(nb);
+            g.DrawImage(b, -r.X, -r.Y);
+            return nb;
         }
 
         [DllImport("user32.dll")]
@@ -45,12 +41,7 @@ namespace TestApi.Helpers
         private static IntPtr GetWindowByName(string procName)
         {
             var proc = Process.GetProcessesByName(procName).FirstOrDefault();
-            if (proc != null)
-            {
-                return proc.MainWindowHandle;
-            }
-
-            return IntPtr.Zero;
+            return proc?.MainWindowHandle ?? IntPtr.Zero;
         }
 
         [StructLayout(LayoutKind.Sequential)]

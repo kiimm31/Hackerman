@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using AutoMapper;
 using CSharpFunctionalExtensions;
 using MediatR;
-using AutoMapper;
+using System.Threading;
+using System.Threading.Tasks;
 using TestApi.Helpers;
 using TestApi.Models.Dto;
 

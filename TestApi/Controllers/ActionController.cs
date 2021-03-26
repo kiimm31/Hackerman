@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using TestApi.Commands;
-using TestApi.Models.Dto;
 using TestApi.Notification;
 using TestApi.Services;
 
@@ -10,12 +9,12 @@ namespace TestApi.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class RandomController : ControllerBase
+    public class ActionController : ControllerBase
     {
         private readonly IMediator _mediator;
         private readonly CapPublishService _capPublisher;
 
-        public RandomController(IMediator mediator, CapPublishService capPublisher)
+        public ActionController(IMediator mediator, CapPublishService capPublisher)
         {
             _mediator = mediator;
             _capPublisher = capPublisher;
@@ -56,7 +55,7 @@ namespace TestApi.Controllers
 
         [HttpPost]
         [Route("OCR")]
-        public async Task<string> OCRTask(PerformOcrCommand request)
+        public async Task<string> OcrTask(PerformOcrCommand request)
         {
             var result = await _mediator.Send(request);
 
