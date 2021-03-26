@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using TestApi.Commands;
+using TestApi.Models.Dto;
 using TestApi.Notification;
 using TestApi.Services;
 
@@ -52,5 +53,15 @@ namespace TestApi.Controllers
             
             return true;
         }
+
+        [HttpPost]
+        [Route("OCR")]
+        public async Task<string> OCRTask(PerformOcrCommand request)
+        {
+            var result = await _mediator.Send(request);
+
+            return result.IsSuccess ? result.Value : result.Error;
+        }
+
     }
 }
