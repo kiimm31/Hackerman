@@ -39,8 +39,6 @@ namespace TestApi
             });
 
             services.AddAutoMapper(typeof(Startup));
-
-
             services.AddHostedService<QueueService>();
             services.AddHostedService<CapMonitorService>();
             services.AddSingleton<IEventQueue,EventQueue>();
