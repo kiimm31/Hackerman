@@ -38,6 +38,8 @@ namespace TestApi
                 options.UseDashboard();
             });
 
+            services.AddAutoMapper(typeof(Startup));
+
 
             services.AddHostedService<QueueService>();
             services.AddHostedService<CapMonitorService>();
