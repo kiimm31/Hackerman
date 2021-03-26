@@ -5,10 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="External\**" />
-    <Content Remove="External\**" />
-    <EmbeddedResource Remove="External\**" />
-    <None Remove="External\**" />
   </ItemGroup>
 
   <ItemGroup>
