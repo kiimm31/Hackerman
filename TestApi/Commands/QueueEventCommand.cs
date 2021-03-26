@@ -4,6 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using TestApi.Interfaces;
 using TestApi.Models;
+using TestApi.Models.Events;
 
 namespace TestApi.Commands
 {

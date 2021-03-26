@@ -2,7 +2,7 @@
 using TestApi.Commands;
 using TestApi.Models.Dto;
 
-namespace TestApi.Helpers
+namespace TestApi.MapperProfiles
 {
     public class OcrProfile : Profile
     {
