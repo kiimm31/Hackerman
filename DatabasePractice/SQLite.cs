@@ -31,7 +31,7 @@ namespace DatabasePractice
 
         public string EncryptString(string unHashed)
         {
-            byte[] b = System.Text.ASCIIEncoding.ASCII.GetBytes(unHashed);
+            byte[] b = System.Text.Encoding.ASCII.GetBytes(unHashed);
             string encrypted = Convert.ToBase64String(b);
             return encrypted;
         }
@@ -43,9 +43,9 @@ namespace DatabasePractice
             try
             {
                 b = Convert.FromBase64String(hashed);
-                decrypted = System.Text.ASCIIEncoding.ASCII.GetString(b);
+                decrypted = System.Text.Encoding.ASCII.GetString(b);
             }
-            catch (FormatException fe)
+            catch (FormatException)
             {
                 decrypted = "";
             }
