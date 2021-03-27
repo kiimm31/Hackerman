@@ -2,11 +2,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace PracticeHackerRank
 {
-    class NonDivisibleSet
+    internal class NonDivisibleSet
     {
         [Test]
         [TestCase(3, 1, 7, 2, 4, ExpectedResult = 3)]

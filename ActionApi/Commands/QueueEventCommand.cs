@@ -20,11 +20,11 @@ namespace TestApi.Commands
         {
             _queue = queue;
         }
+
         public Task<Result> Handle(QueueEventCommand request, CancellationToken cancellationToken)
         {
             _queue.QueueRequestEvent(request.Event);
             return Task.Run(Result.Success, cancellationToken);
         }
     }
-
 }

@@ -5,7 +5,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using TestApi.Commands;
 using TestApi.Interfaces;
-using TestApi.Models;
 using TestApi.Models.Events;
 
 namespace TestApi.Services
@@ -45,6 +44,7 @@ namespace TestApi.Services
                                 _logger.LogError(result.Error);
                             }
                             break;
+
                         default:
                             _logger.LogError($"Unhandled Event Type {workItem.GetType().Name}");
                             break;

@@ -1,6 +1,5 @@
 ﻿using Microsoft.Data.Sqlite;
 using System;
-using System.Data;
 using System.Data.SQLite;
 using System.IO;
 

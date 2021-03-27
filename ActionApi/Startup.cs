@@ -5,10 +5,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Savorboard.CAP.InMemoryMessageQueue;
+using Serilog;
 using TestApi.Commands;
 using TestApi.Interfaces;
 using TestApi.Services;
-using Serilog;
 
 namespace TestApi
 {
@@ -42,7 +42,7 @@ namespace TestApi
             services.AddAutoMapper(typeof(Startup));
             services.AddHostedService<QueueService>();
             services.AddHostedService<CapMonitorService>();
-            services.AddSingleton<IEventQueue,EventQueue>();
+            services.AddSingleton<IEventQueue, EventQueue>();
             services.AddSingleton<CapPublishService>();
         }
 

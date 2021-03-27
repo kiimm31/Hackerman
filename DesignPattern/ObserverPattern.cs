@@ -6,6 +6,7 @@ using System.Linq;
 namespace DesignPattern
 {
     #region HeadFirst Example
+
     public class ObserverPattern
     {
         public ObserverPattern()
@@ -20,7 +21,9 @@ namespace DesignPattern
     public interface IObservable
     {
         void RegisterObserver(IObserver observer);
+
         void UnregisterObserver(IObserver observer);
+
         void Notify();
     }
 
@@ -83,6 +86,7 @@ namespace DesignPattern
         private readonly WeatherStation _observable;
 
         private double _currentTemperature { get; set; }
+
         public DisplayMonitor(WeatherStation observable)
         {
             _observable = observable;
@@ -99,12 +103,14 @@ namespace DesignPattern
             Display();
         }
     }
-    #endregion
+
+    #endregion HeadFirst Example
 
     #region System.Observer from microsoft
+
     public struct Location
     {
-        double lat, lon;
+        private double lat, lon;
 
         public Location(double latitude, double longitude)
         {
@@ -151,7 +157,7 @@ namespace DesignPattern
                 if (_observer != null && _observers.Contains(_observer))
                     _observers.Remove(_observer);
             }
-        } // Concrete UnregisterMethod 
+        } // Concrete UnregisterMethod
 
         public void TrackLocation(Nullable<Location> loc) //Notify
         {
@@ -173,12 +179,12 @@ namespace DesignPattern
             observers.Clear();
         }
     }
+
     public class LocationUnknownException : Exception
     {
         internal LocationUnknownException()
         { }
     }
-
 
     public class LocationReporter : IObserver<Location>
     {
@@ -221,5 +227,5 @@ namespace DesignPattern
         }
     }
 
-    #endregion
+    #endregion System.Observer from microsoft
 }

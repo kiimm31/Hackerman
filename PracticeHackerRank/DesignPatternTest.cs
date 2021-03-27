@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using DesignPattern;
+﻿using DesignPattern;
 using NUnit.Framework;
 
 namespace PracticeHackerRank
 {
-    class DesignPatternTest
+    internal class DesignPatternTest
     {
         [Test]
         public void DecoratorPattern()
@@ -33,7 +30,6 @@ namespace PracticeHackerRank
 
             templateMethodPattern.Save();
         }
-
 
         [Test]
         public void hello()

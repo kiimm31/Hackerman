@@ -2,11 +2,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace PracticeHackerRank
 {
-    class MagicCube
+    internal class MagicCube
     {
         [Test]
         [TestCaseSource(nameof(NotMagicCube))]
@@ -40,11 +39,10 @@ namespace PracticeHackerRank
 
             var d = keyValuePairs.Min(x => x.Value);
 
-
             Assert.AreEqual(1, 1);
         }
 
-        List<int[,]> getAllPossibleMagicCube()
+        private List<int[,]> getAllPossibleMagicCube()
         {
             List<int[,]> vs1 = new List<int[,]>()
             {
@@ -60,10 +58,9 @@ namespace PracticeHackerRank
             return vs1;
         }
 
-        static object[] NotMagicCube =
+        private static object[] NotMagicCube =
         {
             new int[3, 3] {{ 5, 3, 4 }, { 1, 5, 8 }, { 6, 4, 2 } }
         };
-
     }
 }

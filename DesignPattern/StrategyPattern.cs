@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace DesignPattern
+﻿namespace DesignPattern
 {
     public class Duck
     {
@@ -24,7 +20,6 @@ namespace DesignPattern
         {
             return _flyBehaviour.Fly();
         }
-
     }
 
     public interface IQuackBehaviour
@@ -36,7 +31,6 @@ namespace DesignPattern
     {
         string Fly();
     }
-
 
     public class JetFlyBehaviour : IFlyBehaviour
     {
@@ -56,10 +50,10 @@ namespace DesignPattern
 
     public class StrategyPattern
     {
-        Duck _duck;
+        private Duck _duck;
+
         public StrategyPattern()
         {
-
         }
 
         public void GiveBirthToToyDuck()

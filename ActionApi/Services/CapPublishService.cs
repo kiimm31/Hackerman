@@ -1,5 +1,5 @@
-﻿using System.Threading.Tasks;
-using DotNetCore.CAP;
+﻿using DotNetCore.CAP;
+using System.Threading.Tasks;
 using TestApi.Interfaces;
 
 namespace TestApi.Services

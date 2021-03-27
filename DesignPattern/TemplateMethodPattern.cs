@@ -2,7 +2,6 @@
 
 namespace DesignPattern
 {
-
     public abstract class Record
     {
         public void Save()
@@ -14,8 +13,8 @@ namespace DesignPattern
 
         public abstract void Validate(); // abstraction Method
 
-        public virtual void beforeSave() 
-        { 
+        public virtual void beforeSave()
+        {
             // default hook method
         }
     }
@@ -37,7 +36,7 @@ namespace DesignPattern
 
     public class TemplateMethodPattern
     {
-        User _user;
+        private User _user;
 
         public TemplateMethodPattern()
         {

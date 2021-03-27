@@ -2,7 +2,6 @@ using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Numerics;
 
 namespace PracticeHackerRank
 {
@@ -14,9 +13,7 @@ namespace PracticeHackerRank
             List<int> firstDay = new List<int>() { 1, 10, 11 };
             List<int> lastDay = new List<int>() { 11, 10, 11 };
 
-
             List<Tuple<int, int>> totalInt = new List<Tuple<int, int>>();
-
 
             for (int investor = 0; investor < firstDay.Count(); investor++)
             {
@@ -28,7 +25,6 @@ namespace PracticeHackerRank
                 }
 
                 totalInt.AddRange(thisInvestorAvailableDay);
-
             }
 
             int sm = firstDay.Min();

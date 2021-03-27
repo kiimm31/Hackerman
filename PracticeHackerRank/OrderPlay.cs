@@ -1,15 +1,14 @@
 ﻿using NUnit.Framework;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Text;
 
 namespace PracticeHackerRank
 {
-    class OrderPlay
+    internal class OrderPlay
     {
         #region Cards
+
         [Test]
         public void Cards()
         {
@@ -60,6 +59,7 @@ namespace PracticeHackerRank
             a = b;
             b = temp;
         }
+
         private void prnPermut(int[] list, int k, int m, ref List<int[]> output)
         {
             int i;
@@ -81,7 +81,7 @@ namespace PracticeHackerRank
                 }
         }
 
-        #endregion
+        #endregion Cards
 
         #region SwapArray
 
@@ -109,7 +109,7 @@ namespace PracticeHackerRank
             return "NO";
         }
 
-        #endregion
+        #endregion SwapArray
 
         #region AlmostSored
 
@@ -137,7 +137,7 @@ namespace PracticeHackerRank
             for (int j = arr.Length - 1; j > 0; j--)
             {
                 z++;
-                // 
+                //
                 if (arr[j] < arr[j - 1])
                 {
                     fromBack = z;
@@ -164,8 +164,7 @@ namespace PracticeHackerRank
             return "no";
         }
 
-
-        #endregion
+        #endregion AlmostSored
 
         [Test]
         [TestCase(3, 4, 1, 2, ExpectedResult = 2)]

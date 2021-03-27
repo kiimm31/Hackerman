@@ -12,13 +12,22 @@ namespace TestApi.Controllers
     [Route("api/[controller]")]
     public class ActionController : ControllerBase
     {
-        private readonly IMediator _mediator;
         private readonly CapPublishService _capPublisher;
+        private readonly IMediator _mediator;
 
         public ActionController(IMediator mediator, CapPublishService capPublisher)
         {
             _mediator = mediator;
             _capPublisher = capPublisher;
+        }
+
+        [HttpPost]
+        [Route("Fuzzy")]
+        public async Task<int> Fuzzy(FuzzyStringComparisonCommand command)
+        {
+            var result = await _mediator.Send(command);
+
+            return result.IsSuccess ? result.Value : 0;
         }
 
         [HttpGet]
@@ -27,31 +36,6 @@ namespace TestApi.Controllers
         {
             var result = await _mediator.Send(new GetRandomNumberCommand());
             return result.IsSuccess ? $"RandomString : {result.Value}" : $"ERROR : {result.Error}";
-        }
-
-        [HttpPost]
-        [Route("Notify")]
-        public async Task<bool> SendNotificationAsync(NotifyRequest request)
-        {
-            await _mediator.Publish(request);
-            return true;
-        }
-
-        [HttpPost]
-        [Route("Queue")]
-        public async Task<bool> QueueEvent(QueueEventCommand eventRequest)
-        {
-            var result = await _mediator.Send(eventRequest);
-            return result.IsSuccess;
-        }
-
-        [HttpPost]
-        [Route("CAP")]
-        public async Task<bool> PublishEvent(QueueEventCommand eventRequest)
-        {
-            await _capPublisher.PublishAsync(eventRequest.Event);
-            
-            return true;
         }
 
         [HttpPost]
@@ -64,13 +48,28 @@ namespace TestApi.Controllers
         }
 
         [HttpPost]
-        [Route("Fuzzy")]
-        public async Task<int> Fuzzy(FuzzyStringComparisonCommand command)
+        [Route("CAP")]
+        public async Task<bool> PublishEvent(QueueEventCommand eventRequest)
         {
-            var result = await _mediator.Send(command);
+            await _capPublisher.PublishAsync(eventRequest.Event);
 
-            return result.IsSuccess ? result.Value : 0;
+            return true;
         }
 
+        [HttpPost]
+        [Route("Queue")]
+        public async Task<bool> QueueEvent(QueueEventCommand eventRequest)
+        {
+            var result = await _mediator.Send(eventRequest);
+            return result.IsSuccess;
+        }
+
+        [HttpPost]
+        [Route("Notify")]
+        public async Task<bool> SendNotificationAsync(NotifyRequest request)
+        {
+            await _mediator.Publish(request);
+            return true;
+        }
     }
 }

@@ -2,13 +2,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace PracticeHackerRank
 {
-    class Gaming
+    internal class Gaming
     {
         #region AliceRank
+
         [Test]
         [TestCaseSource(nameof(Rankings))]
         public void alice(int[] scores, int[] alice)
@@ -67,18 +67,19 @@ namespace PracticeHackerRank
                 }
 
                 previousScore = player;
-
             }
             return 1;
         }
 
-        static object[] Rankings =
+        private static object[] Rankings =
         {
             new object[] { new int[] { 100, 100, 50, 40, 40, 20, 10 }, new int[] { 5, 25, 50, 120 } }
         };
-        #endregion
+
+        #endregion AliceRank
 
         #region CardGame
+
         [Test]
         [TestCase(1, 3, 5, 7, 9, ExpectedResult = "BOB")]
         [TestCase(7, 4, 6, 5, 8, ExpectedResult = "ANDY")]
@@ -117,7 +118,6 @@ namespace PracticeHackerRank
                 turn = switchTurn(turn);
             }
 
-
             if (turn == 'B')
             {
                 return "ANDY";
@@ -139,7 +139,8 @@ namespace PracticeHackerRank
                 return 'B';
             }
         }
-        #endregion
+
+        #endregion CardGame
 
         [Test]
         [TestCase(0, 0, 0, 0, 1, 0, ExpectedResult = 3)]
@@ -179,6 +180,5 @@ namespace PracticeHackerRank
 
             return jumpCount;
         }
-
     }
 }

@@ -6,7 +6,6 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using TestApi.Commands;
-using TestApi.Models;
 using TestApi.Models.Events;
 
 namespace TestApi.Services

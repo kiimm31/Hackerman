@@ -27,6 +27,7 @@ namespace TestApi.Helpers
 
             return cropArea == Rectangle.Empty ? result : cropAtRect(result, cropArea);
         }
+
         public static Bitmap cropAtRect(Bitmap b, Rectangle r)
         {
             var nb = new Bitmap(r.Width, r.Height);
@@ -52,7 +53,5 @@ namespace TestApi.Helpers
             public int Right;
             public int Bottom;
         }
-
-        
     }
 }

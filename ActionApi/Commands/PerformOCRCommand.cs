@@ -26,6 +26,7 @@ namespace TestApi.Commands
         {
             _mapper = mapper;
         }
+
         public async Task<Result<string>> Handle(PerformOcrCommand request, CancellationToken cancellationToken)
         {
             var dto = _mapper.Map<OcrRequest>(request);

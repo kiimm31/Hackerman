@@ -1,21 +1,19 @@
-﻿using NuGet.Frameworks;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace PracticeHackerRank
 {
-    class StringPlay
+    internal class StringPlay
     {
         #region TimeWords
+
         [Test]
         [TestCase(1, 1, ExpectedResult = "ONE MINUTE PAST ONE")]
         public string timeInWords(int h, int m)
         {
             string returnString = string.Empty;
-
 
             string hour = string.Empty;
             string minute = string.Empty;
@@ -33,7 +31,6 @@ namespace PracticeHackerRank
                 }
 
                 returnString = $"Half Past {hour}";
-
             }
             else if (m == 0)
             {
@@ -49,9 +46,7 @@ namespace PracticeHackerRank
                 }
 
                 returnString = $"{hour} o' clock";
-
             }
-
             else if (m > 30)
             {
                 // 60 - m minutes to h + 1
@@ -120,27 +115,35 @@ namespace PracticeHackerRank
                 case 1:
                     name = "One";
                     break;
+
                 case 2:
                     name = "Two";
                     break;
+
                 case 3:
                     name = "Three";
                     break;
+
                 case 4:
                     name = "Four";
                     break;
+
                 case 5:
                     name = "Five";
                     break;
+
                 case 6:
                     name = "Six";
                     break;
+
                 case 7:
                     name = "Seven";
                     break;
+
                 case 8:
                     name = "Eight";
                     break;
+
                 case 9:
                     name = "Nine";
                     break;
@@ -157,57 +160,75 @@ namespace PracticeHackerRank
                 case 10:
                     name = "Ten";
                     break;
+
                 case 11:
                     name = "Eleven";
                     break;
+
                 case 12:
                     name = "Twelve";
                     break;
+
                 case 13:
                     name = "Thirteen";
                     break;
+
                 case 14:
                     name = "Fourteen";
                     break;
+
                 case 15:
                     name = "quarter";
                     break;
+
                 case 16:
                     name = "Sixteen";
                     break;
+
                 case 17:
                     name = "Seventeen";
                     break;
+
                 case 18:
                     name = "Eighteen";
                     break;
+
                 case 19:
                     name = "Nineteen";
                     break;
+
                 case 20:
                     name = "Twenty";
                     break;
+
                 case 30:
                     name = "Thirty";
                     break;
+
                 case 40:
                     name = "Fourty";
                     break;
+
                 case 50:
                     name = "Fifty";
                     break;
+
                 case 60:
                     name = "Sixty";
                     break;
+
                 case 70:
                     name = "Seventy";
                     break;
+
                 case 80:
                     name = "Eighty";
                     break;
+
                 case 90:
                     name = "Ninety";
                     break;
+
                 default:
                     if (_Number > 0)
                     {
@@ -218,9 +239,10 @@ namespace PracticeHackerRank
             return name;
         }
 
-        #endregion
+        #endregion TimeWords
 
         #region VowelCount
+
         [Test]
         [TestCase("caberqiitefg", 5, ExpectedResult = "erqii")]
         [TestCase("azerdii", 5, ExpectedResult = "erdii")]
@@ -274,7 +296,8 @@ namespace PracticeHackerRank
 
             return returnString;
         }
-        #endregion
+
+        #endregion VowelCount
 
         #region Encryption
 
@@ -324,7 +347,8 @@ namespace PracticeHackerRank
 
             return string.Join(" ", returnList);
         }
-        #endregion
+
+        #endregion Encryption
 
         #region GridSearch
 
@@ -392,7 +416,7 @@ namespace PracticeHackerRank
             return indexes;
         }
 
-        static object[] gridSearchCases =
+        private static object[] gridSearchCases =
         {
             new object[]
             {
@@ -452,11 +476,9 @@ namespace PracticeHackerRank
                 },
                 "YES"
             },
-
-
         };
 
-        #endregion
+        #endregion GridSearch
 
         public static void fizzBuzz(int n)
         {
@@ -484,7 +506,6 @@ namespace PracticeHackerRank
                     Console.WriteLine(returnString);
                 }
             }
-
         }
 
         [Test]
@@ -506,18 +527,23 @@ namespace PracticeHackerRank
                     case '(':
                         numberOfRound++;
                         break;
+
                     case ')':
                         numberOfRound--;
                         break;
+
                     case '[':
                         numberOfSquare++;
                         break;
+
                     case ']':
                         numberOfSquare--;
                         break;
+
                     case '?':
                         numberofUnknown++;
                         break;
+
                     default:
                         break;
                 }
@@ -540,7 +566,6 @@ namespace PracticeHackerRank
             else
                 return 0;
         }
-
 
         [Test]
         [TestCase("RBY_YBR", ExpectedResult = "YES")]

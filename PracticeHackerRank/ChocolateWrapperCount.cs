@@ -1,11 +1,9 @@
 ﻿using NUnit.Framework;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace PracticeHackerRank
 {
-    class ChocolateWrapperCount
+    internal class ChocolateWrapperCount
     {
         [Test]
         [TestCase(6, 2, 2, ExpectedResult = 5)]

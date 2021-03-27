@@ -1,17 +1,15 @@
 ﻿using NUnit.Framework;
-using NUnit.Framework.Constraints;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Numerics;
-using System.Text;
 
 namespace PracticeHackerRank
 {
-    class NumberPlay
+    internal class NumberPlay
     {
         #region SuperBig Integer
+
         [Test]
         [TestCase(25)]
         public void extraLongFactorials(int n)
@@ -41,9 +39,10 @@ namespace PracticeHackerRank
             long i = (long)(sum - sum);
         }
 
-        #endregion
+        #endregion SuperBig Integer
 
         #region Sum 4
+
         [Test]
         [TestCase(1, 2, 3, 4, 5, ExpectedResult = "10 14")]
         [TestCase(256741038, 623958417, 467905213, 714532089, 938071625, ExpectedResult = "2063136757 2744467344")]
@@ -66,9 +65,9 @@ namespace PracticeHackerRank
             ulong min = tempMin.Aggregate((a, c) => a + c);
 
             return $"{min} {Max}";
-
         }
-        #endregion
+
+        #endregion Sum 4
 
         [Test]
         [TestCase(1, 1, 1, 2, 2, 3, 3, ExpectedResult = 2)]
@@ -140,7 +139,7 @@ namespace PracticeHackerRank
             Assert.IsTrue(maxCount > 0);
         }
 
-        static object[] Lane =
+        private static object[] Lane =
         {
             new object[] { new int[][] {
                 new int[]{0,3 },
@@ -174,8 +173,6 @@ namespace PracticeHackerRank
             Assert.IsNotNull(returnList);
         }
 
-
-
         [Test]
         [TestCaseSource(nameof(containers))]
         public void organizingContainers(int[][] container)
@@ -207,8 +204,7 @@ namespace PracticeHackerRank
             }
         }
 
-
-        static object[] containers =
+        private static object[] containers =
         {
             new object[] {
                 new int[][]
@@ -280,23 +276,24 @@ namespace PracticeHackerRank
 
             int[] count = new int[total + 1];
 
-            // base case 
+            // base case
             count[0] = 1;
 
-            // count ways for all values up  
-            // to 'N' and store the result 
+            // count ways for all values up
+            // to 'N' and store the result
             for (int i = 1; i <= total; i++)
                 for (int j = 0; j < arr.Length; j++)
 
-                    // if i >= arr[j] then 
-                    // accumulate count for value 'i' as 
-                    // ways to form value 'i-arr[j]' 
+                    // if i >= arr[j] then
+                    // accumulate count for value 'i' as
+                    // ways to form value 'i-arr[j]'
                     if (i >= arr[j])
                         count[i] += count[i - arr[j]];
 
-            // required number of ways  
+            // required number of ways
             return count[total];
         }
+
         [Test]
         [TestCase(200, 405, ExpectedResult = 4)]
         [TestCase(400000, 500000, ExpectedResult = 3)]
@@ -343,7 +340,5 @@ namespace PracticeHackerRank
 
             return returnList;
         }
-
-
     }
 }

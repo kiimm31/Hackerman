@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Runtime.CompilerServices;
 
 namespace DesignPattern
 {
@@ -10,7 +9,6 @@ namespace DesignPattern
 
     public abstract class AddonDecorator : Beverage
     {
-
     }
 
     public class Espresso : Beverage
@@ -20,7 +18,6 @@ namespace DesignPattern
             return 1;
         }
     }
-
 
     public class CaramelDecorator : AddonDecorator
     {
@@ -39,10 +36,10 @@ namespace DesignPattern
 
     public class DecoratorPattern
     {
-        Beverage Beverage;
+        private Beverage Beverage;
+
         public DecoratorPattern()
         {
-
         }
 
         public void CreateDrink()
@@ -66,7 +63,9 @@ namespace DesignPattern
         protected bool isSedan;
         protected string seats;
 
-        public Car() { }
+        public Car()
+        {
+        }
 
         public Car(bool isSedan, string seats)
         {
@@ -96,7 +95,6 @@ namespace DesignPattern
         }
     }
 
-
     public class WagonR : Car
     {
         private readonly int _mileage;
@@ -113,6 +111,4 @@ namespace DesignPattern
             base.seats = 4.ToString();
         }
     }
-
-    
 }

@@ -14,7 +14,6 @@ namespace TestApi.Services
 
         public EventQueue()
         {
-
         }
 
         public void QueueRequestEvent(IEventArgs requestEvent)
