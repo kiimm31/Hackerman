@@ -46,8 +46,12 @@ namespace ActionApi
             services.AddSingleton<IEventQueue, EventQueue>();
             services.AddSingleton<CapPublishService>();
             services.AddDbContext<ActionContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"),b => b.MigrationsAssembly(nameof(ActionApi))));
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"),
+                b => b.MigrationsAssembly(nameof(ActionApi)))
+                ,ServiceLifetime.Transient);
 
+
+            services.AddHealthChecks();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -67,6 +71,7 @@ namespace ActionApi
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHealthChecks("/health");
             });
 
             app.UseSwagger();
