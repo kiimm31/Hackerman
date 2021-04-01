@@ -1,7 +1,7 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 
-namespace TestApi.Interfaces
+namespace ActionApi.Interfaces
 {
     public interface IEventQueue
     {

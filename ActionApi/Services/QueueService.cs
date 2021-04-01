@@ -3,11 +3,11 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System.Threading;
 using System.Threading.Tasks;
-using TestApi.Commands;
-using TestApi.Interfaces;
-using TestApi.Models.Events;
+using ActionApi.Commands;
+using ActionApi.Interfaces;
+using ActionApi.Models.Events;
 
-namespace TestApi.Services
+namespace ActionApi.Services
 {
     public class QueueService : BackgroundService
     {

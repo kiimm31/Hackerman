@@ -1,4 +1,4 @@
-﻿namespace TestApi.Models.Dto
+﻿namespace ActionApi.Models.Dto
 {
     public class OcrRequest
     {

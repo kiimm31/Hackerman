@@ -2,10 +2,10 @@
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
-using TestApi.Interfaces;
-using TestApi.Models.Events;
+using ActionApi.Interfaces;
+using ActionApi.Models.Events;
 
-namespace TestApi.Commands
+namespace ActionApi.Commands
 {
     public class QueueEventCommand : IRequest<Result>
     {

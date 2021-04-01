@@ -1,7 +1,7 @@
 ﻿using System;
-using TestApi.Interfaces;
+using ActionApi.Interfaces;
 
-namespace TestApi.Models.Events
+namespace ActionApi.Models.Events
 {
     public class RandomEventArgs : IEventArgs
     {

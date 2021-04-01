@@ -5,10 +5,10 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using TestApi.Commands;
-using TestApi.Models.Events;
+using ActionApi.Commands;
+using ActionApi.Models.Events;
 
-namespace TestApi.Services
+namespace ActionApi.Services
 {
     public class CapMonitorService : BackgroundService, ICapSubscribe
     {

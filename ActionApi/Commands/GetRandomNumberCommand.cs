@@ -4,9 +4,9 @@ using Polly.Retry;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using TestApi.Extensions;
+using ActionApi.Extensions;
 
-namespace TestApi.Commands
+namespace ActionApi.Commands
 {
     public class GetRandomNumberCommand : IRequest<Result<string>>
     {

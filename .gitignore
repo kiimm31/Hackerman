@@ -17,3 +17,6 @@
 /TestApi/obj
 /ActionApi/bin/Debug/netcoreapp3.1
 /ActionApi/obj
+/Action.Domain/bin/Debug/netstandard2.0
+/Action.Domain/obj
+/ActionApi/Migrations

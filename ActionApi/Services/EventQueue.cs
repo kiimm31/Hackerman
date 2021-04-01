@@ -1,9 +1,9 @@
 ﻿using System.Collections.Concurrent;
 using System.Threading;
 using System.Threading.Tasks;
-using TestApi.Interfaces;
+using ActionApi.Interfaces;
 
-namespace TestApi.Services
+namespace ActionApi.Services
 {
     public class EventQueue : IEventQueue
     {

@@ -4,9 +4,9 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using Tesseract;
-using TestApi.Models.Dto;
+using ActionApi.Models.Dto;
 
-namespace TestApi.Helpers
+namespace ActionApi.Helpers
 {
     public class ImageHelper
     {

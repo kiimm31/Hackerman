@@ -2,23 +2,25 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
-using TestApi.Commands;
-using TestApi.Notification;
-using TestApi.Services;
+using ActionApi.Commands;
+using ActionApi.Notification;
+using ActionApi.Services;
 
-namespace TestApi.Controllers
+namespace ActionApi.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
     public class ActionController : ControllerBase
     {
         private readonly CapPublishService _capPublisher;
+        private readonly ActionContext _actionContext;
         private readonly IMediator _mediator;
 
-        public ActionController(IMediator mediator, CapPublishService capPublisher)
+        public ActionController(IMediator mediator, CapPublishService capPublisher, ActionContext actionContext)
         {
             _mediator = mediator;
             _capPublisher = capPublisher;
+            _actionContext = actionContext;
         }
 
         [HttpPost]

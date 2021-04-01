@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TestApi.Interfaces
+namespace ActionApi.Interfaces
 {
     public interface IEventArgs
     {

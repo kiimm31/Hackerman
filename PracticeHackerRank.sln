@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DatabasePractice", "Databas
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ActionApi", "ActionApi\ActionApi.csproj", "{D2E44EB4-AFF8-4E17-AC6F-3ECBC39A20FA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Action.Domain", "Action.Domain\Action.Domain.csproj", "{17489108-29CA-401D-9F59-68B4F89050BC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{D2E44EB4-AFF8-4E17-AC6F-3ECBC39A20FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D2E44EB4-AFF8-4E17-AC6F-3ECBC39A20FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D2E44EB4-AFF8-4E17-AC6F-3ECBC39A20FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{17489108-29CA-401D-9F59-68B4F89050BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17489108-29CA-401D-9F59-68B4F89050BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17489108-29CA-401D-9F59-68B4F89050BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17489108-29CA-401D-9F59-68B4F89050BC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

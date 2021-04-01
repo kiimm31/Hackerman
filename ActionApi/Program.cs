@@ -3,7 +3,7 @@ using Microsoft.Extensions.Hosting;
 using Serilog;
 using Serilog.Events;
 
-namespace TestApi
+namespace ActionApi
 {
     public class Program
     {

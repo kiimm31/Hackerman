@@ -2,7 +2,7 @@
 using Polly.Retry;
 using System;
 
-namespace TestApi.Extensions
+namespace ActionApi.Extensions
 {
     public static class RetryPolicies
     {

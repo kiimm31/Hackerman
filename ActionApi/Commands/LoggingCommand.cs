@@ -3,7 +3,7 @@ using Microsoft.Extensions.Logging;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace TestApi.Commands
+namespace ActionApi.Commands
 {
     public class LoggingCommand<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
     {

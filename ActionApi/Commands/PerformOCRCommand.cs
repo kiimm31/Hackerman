@@ -3,10 +3,10 @@ using CSharpFunctionalExtensions;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
-using TestApi.Helpers;
-using TestApi.Models.Dto;
+using ActionApi.Helpers;
+using ActionApi.Models.Dto;
 
-namespace TestApi.Commands
+namespace ActionApi.Commands
 {
     public class PerformOcrCommand : IRequest<Result<string>>
     {

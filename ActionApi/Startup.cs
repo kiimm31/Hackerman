@@ -1,16 +1,18 @@
+using Action.Domain;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Savorboard.CAP.InMemoryMessageQueue;
 using Serilog;
-using TestApi.Commands;
-using TestApi.Interfaces;
-using TestApi.Services;
+using ActionApi.Commands;
+using ActionApi.Interfaces;
+using ActionApi.Services;
 
-namespace TestApi
+namespace ActionApi
 {
     public class Startup
     {
@@ -29,7 +31,6 @@ namespace TestApi
             services.AddMediatR(typeof(Startup));
             services.AddSwaggerGen();
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingCommand<,>));
-
             services.AddCap(options =>
             {
                 options.FailedRetryCount = 3;
@@ -44,6 +45,9 @@ namespace TestApi
             services.AddHostedService<CapMonitorService>();
             services.AddSingleton<IEventQueue, EventQueue>();
             services.AddSingleton<CapPublishService>();
+            services.AddDbContext<ActionContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"),b => b.MigrationsAssembly(nameof(ActionApi))));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

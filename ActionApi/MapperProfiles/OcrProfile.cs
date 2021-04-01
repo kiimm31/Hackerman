@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
-using TestApi.Commands;
-using TestApi.Models.Dto;
+using ActionApi.Commands;
+using ActionApi.Models.Dto;
 
-namespace TestApi.MapperProfiles
+namespace ActionApi.MapperProfiles
 {
     public class OcrProfile : Profile
     {
