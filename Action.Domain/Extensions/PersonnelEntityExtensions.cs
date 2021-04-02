@@ -12,9 +12,9 @@ namespace Action.Domain.Extensions
             modelBuilder.Entity<Personnel>().OwnsMany(x => x.Licenses,
                 a =>
                 {
-                    a.ToTable(nameof(License).ToUpper());
-                    a.WithOwner().HasForeignKey(nameof(License.PersonnelId));
-                    a.Property<int>(nameof(License.Id));
+                    a.ToTable(nameof(License).ToUpper())
+                    .WithOwner()
+                    .HasForeignKey(nameof(License.PersonnelId));
                     a.HasKey(nameof(License.Id));
                 });
         }
