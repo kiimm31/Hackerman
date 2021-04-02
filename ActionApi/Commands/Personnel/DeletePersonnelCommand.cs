@@ -23,7 +23,7 @@ namespace ActionApi.Commands
         {
             try
             {
-                var personnel = await _context.Personnels.SingleAsync(x => x.UserId == request.UserId, cancellationToken);
+                var personnel = await _context.Personnels.SingleAsync(x => x.Id == request.UserId, cancellationToken);
 
                 _context.Personnels.Remove(personnel);
 

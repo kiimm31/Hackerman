@@ -11,6 +11,7 @@ using Serilog;
 using ActionApi.Commands;
 using ActionApi.Interfaces;
 using ActionApi.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace ActionApi
 {
@@ -51,6 +52,9 @@ namespace ActionApi
                 ,ServiceLifetime.Transient);
 
 
+            //services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            //    .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, options => Configuration.Bind("JwtSettings", options));
+
             services.AddHealthChecks();
         }
 
@@ -65,6 +69,8 @@ namespace ActionApi
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            //app.UseAuthentication();
 
             app.UseAuthorization();
 

@@ -26,7 +26,7 @@ namespace ActionApi.Commands
         {
             try
             {
-                var personnel = await _actionContext.Personnels.SingleAsync(x => x.UserId == request.UserId);
+                var personnel = await _actionContext.Personnels.SingleAsync(x => x.Id == request.UserId);
 
                 personnel.EditAddress(request.Address);
                 personnel.EditEmail(request.Email);

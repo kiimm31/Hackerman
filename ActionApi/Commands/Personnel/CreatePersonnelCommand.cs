@@ -34,7 +34,7 @@ namespace ActionApi.Commands
 
             await _context.SaveChangesAsync(cancellationToken);
 
-            return Result.Success(added?.Entity.UserId ?? 0);
+            return Result.Success(added?.Entity.Id ?? 0);
         }
     }
 }

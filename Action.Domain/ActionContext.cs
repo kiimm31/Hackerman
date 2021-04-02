@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Action.Domain.Extensions;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
 using System.Linq;
@@ -12,8 +13,7 @@ namespace Action.Domain
 
         public DbSet<Personnel> Personnels { get; set; }
 
-
-        public ActionContext(DbContextOptions<ActionContext> contextOptions): base(contextOptions)
+        public ActionContext(DbContextOptions<ActionContext> contextOptions) : base(contextOptions)
         {
         }
 
@@ -23,8 +23,7 @@ namespace Action.Domain
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<Personnel>().ToTable("PERSONNEL").HasKey(x => x.UserId);
-            modelBuilder.Entity<Personnel>().HasQueryFilter(x => !x.IsDeleted);
+            modelBuilder.AddPersonnelContext();
         }
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)

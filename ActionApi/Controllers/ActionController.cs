@@ -1,10 +1,9 @@
 ﻿using ActionApi.Commands;
+using ActionApi.Notification;
+using ActionApi.Services;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
-using ActionApi.Commands;
-using ActionApi.Notification;
-using ActionApi.Services;
 
 namespace ActionApi.Controllers
 {

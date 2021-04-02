@@ -1,5 +1,6 @@
 ﻿using ActionApi.Commands;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
@@ -15,7 +16,6 @@ namespace ActionApi.Controllers
         {
             _mediator = mediator;
         }
-
 
         [HttpGet]
         [Route(nameof(GetPersonnelById))]
@@ -50,6 +50,16 @@ namespace ActionApi.Controllers
             return result.IsSuccess ? Ok(result.Value) : (IActionResult)NotFound(result.Error);
         }
 
+        [HttpPost]
+        [Route(nameof(AddLicense))]
+        public async Task<IActionResult> AddLicense(AddLicenseCommand command)
+        {
+            var result = await _mediator.Send(command);
+
+            return result.IsSuccess ? Ok() : (IActionResult)NotFound(result.Error);
+        }
+
+
         [HttpPut]
         [Route(nameof(EditPersonnel))]
         public async Task<IActionResult> EditPersonnel(EditPersonnelCommand command)
@@ -62,6 +72,15 @@ namespace ActionApi.Controllers
         [HttpDelete]
         [Route(nameof(DeletePersonnel))]
         public async Task<IActionResult> DeletePersonnel(DeletePersonnelCommand command)
+        {
+            var result = await _mediator.Send(command);
+
+            return result.IsSuccess ? Ok() : (IActionResult)NotFound(result.Error);
+        }
+
+        [HttpDelete]
+        [Route(nameof(DeleteLicense))]
+        public async Task<IActionResult> DeleteLicense(DeleteLicenseCommand command)
         {
             var result = await _mediator.Send(command);
 
