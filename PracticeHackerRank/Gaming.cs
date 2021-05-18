@@ -180,5 +180,46 @@ namespace PracticeHackerRank
 
             return jumpCount;
         }
+
+        [Test]
+        public void hello()
+        {
+            var Bets = new List<Bet>()
+            {
+                new Bet() {TransDate = DateTime.Now, TransId = 1},
+                new Bet() {TransDate = DateTime.Now, TransId = 2},
+                new Bet() {TransDate = DateTime.Now, TransId = 3},
+                new Bet() {TransDate = DateTime.Now, TransId = 4},
+            };
+            var otherBets = new List<Bet>()
+            {
+                new Bet() {TransDate = DateTime.Now, TransId = 1},
+                new Bet() {TransDate = DateTime.Now, TransId = 2},
+                new Bet() {TransDate = DateTime.Now, TransId = 5},
+                new Bet() {TransDate = DateTime.Now, TransId = 6},
+            };
+            var finalBets = from bet in Bets
+                            join otherBet in otherBets on bet.TransId equals otherBet.TransId
+                            select new Bet() { TransId = bet.TransId, TransDate = otherBet.TransDate };
+
+            var finalBets2 = Bets.Join(otherBets,
+                bet => bet.TransId,
+                otherBet => otherBet.TransId,
+                (bet, otherBet) => new Bet()
+                {
+                    TransId = bet.TransId,
+                    TransDate = otherBet.TransDate
+                });
+
+        }
+
+
+    }
+
+
+    class Bet
+    {
+        public DateTime TransDate { get; set; }
+        public int TransId { get; set; }
     }
 }
