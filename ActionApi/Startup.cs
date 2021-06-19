@@ -12,6 +12,8 @@ using ActionApi.Commands;
 using ActionApi.Interfaces;
 using ActionApi.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using TwitchLib.Api;
+using TwitchLib.Api.Interfaces;
 
 namespace ActionApi
 {
@@ -51,10 +53,9 @@ namespace ActionApi
                 b => b.MigrationsAssembly(nameof(ActionApi)))
                 ,ServiceLifetime.Transient);
 
-
+            services.AddHostedService<TwitchBackgroundService>();
             //services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             //    .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, options => Configuration.Bind("JwtSettings", options));
-
             services.AddHealthChecks();
         }
 
