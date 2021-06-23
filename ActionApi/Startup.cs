@@ -53,7 +53,7 @@ namespace ActionApi
                 b => b.MigrationsAssembly(nameof(ActionApi)))
                 ,ServiceLifetime.Transient);
 
-            services.AddHostedService<TwitchBackgroundService>();
+            //services.AddHostedService<TwitchBackgroundService>();
             //services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             //    .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, options => Configuration.Bind("JwtSettings", options));
             services.AddHealthChecks();
