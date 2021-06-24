@@ -1,4 +1,5 @@
 ﻿using ActionApi.Commands;
+using ActionApi.Helpers;
 using ActionApi.Notification;
 using ActionApi.Services;
 using MediatR;
@@ -12,14 +13,12 @@ namespace ActionApi.Controllers
     public class ActionController : ControllerBase
     {
         private readonly CapPublishService _capPublisher;
-        private readonly ActionContext _actionContext;
         private readonly IMediator _mediator;
 
-        public ActionController(IMediator mediator, CapPublishService capPublisher, ActionContext actionContext)
+        public ActionController(IMediator mediator, CapPublishService capPublisher)
         {
             _mediator = mediator;
             _capPublisher = capPublisher;
-            _actionContext = actionContext;
         }
 
         [HttpPost]
@@ -73,5 +72,21 @@ namespace ActionApi.Controllers
             return true;
         }
 
+        [HttpPost]
+        [Route("TryGet")]
+        public async Task<IActionResult> TryGet(string address)
+        {
+            var response = await HttpHelper.GetAsync(new System.Uri(address));
+
+            return Ok(response);
+        }
+
+        [HttpPost]
+        [Route("TryPost")]
+        public async Task<IActionResult> TryPost(string address)
+        {
+            var response = await HttpHelper.PostAsync<string>(null, new System.Uri(address));
+            return Ok(response);
+        }
     }
 }

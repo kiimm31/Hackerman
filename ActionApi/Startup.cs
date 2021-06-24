@@ -1,4 +1,7 @@
 using Action.Domain;
+using ActionApi.Commands;
+using ActionApi.Interfaces;
+using ActionApi.Services;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -8,12 +11,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Savorboard.CAP.InMemoryMessageQueue;
 using Serilog;
-using ActionApi.Commands;
-using ActionApi.Interfaces;
-using ActionApi.Services;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using TwitchLib.Api;
-using TwitchLib.Api.Interfaces;
 
 namespace ActionApi
 {
