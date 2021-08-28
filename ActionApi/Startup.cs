@@ -11,6 +11,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Savorboard.CAP.InMemoryMessageQueue;
 using Serilog;
+using Hangfire;
+using Hangfire.SqlServer;
+using System;
 
 namespace ActionApi
 {
@@ -39,8 +42,24 @@ namespace ActionApi
                 options.UseInMemoryMessageQueue();
                 options.UseDashboard();
             });
+            services.AddHangfire(configuration => configuration
+        .SetDataCompatibilityLevel(CompatibilityLevel.Version_170)
+        .UseSimpleAssemblyNameTypeSerializer()
+        .UseRecommendedSerializerSettings()
+        .UseSqlServerStorage(Configuration.GetConnectionString("HangfireConnection"), new SqlServerStorageOptions
+        {
+            CommandBatchMaxTimeout = TimeSpan.FromMinutes(5),
+            SlidingInvisibilityTimeout = TimeSpan.FromMinutes(5),
+            QueuePollInterval = TimeSpan.Zero,
+            UseRecommendedIsolationLevel = true,
+            DisableGlobalLocks = true
+        }));
 
+            services.AddHangfireServer();
+            services.AddMvc();
             services.AddDistributedMemoryCache();
+
+            services.AddHostedService<HangfireBackgroundWorker>();
 
             services.AddAutoMapper(typeof(Startup));
             services.AddHostedService<QueueService>();
@@ -50,7 +69,7 @@ namespace ActionApi
             services.AddDbContext<ActionContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"),
                 b => b.MigrationsAssembly(nameof(ActionApi)))
-                ,ServiceLifetime.Transient);
+                , ServiceLifetime.Transient);
 
             //services.AddHostedService<TwitchBackgroundService>();
             //services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -59,7 +78,7 @@ namespace ActionApi
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IBackgroundJobClient backgroundJobs, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -67,12 +86,18 @@ namespace ActionApi
             }
 
             app.UseHttpsRedirection();
-
             app.UseRouting();
 
             //app.UseAuthentication();
 
-            app.UseAuthorization();
+            app.UseHangfireDashboard();
+            backgroundJobs.Enqueue(() => Console.WriteLine("Hello world from Hangfire!"));
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+                endpoints.MapHangfireDashboard();
+            });
+            //app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
@@ -81,7 +106,6 @@ namespace ActionApi
             });
 
             app.UseSwagger();
-
             app.UseSerilogRequestLogging();
 
             // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.),

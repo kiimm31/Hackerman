@@ -25,6 +25,7 @@ namespace ActionApi.Commands
 
         public async Task<Result<List<Personnel>>> Handle(GetAllPersonnelsRequest request, CancellationToken cancellationToken)
         {
+
             var personnels = await _context.Personnels.Where(x => (x.FirstName.Contains(request.NameFilter) || x.LastName.Contains(request.NameFilter)) 
                                                                   || string.IsNullOrWhiteSpace(request.NameFilter)).ToListAsync(cancellationToken);
 
