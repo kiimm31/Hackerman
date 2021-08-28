@@ -18,7 +18,7 @@ namespace TDDKata
             if (input.StartsWith("//") && input.Contains("\n"))
             {
                 var strings = input.Split("\n").ToList();
-                 delimiter = strings.First().Substring(2);
+                delimiter = strings.First().Substring(2);
                 strings.RemoveAt(0);
                 input = string.Join(delimiter, strings);
             }
@@ -27,7 +27,7 @@ namespace TDDKata
             var numbers = numbersStr.Select(int.Parse);
             if (numbers.Any(x => x < 0))
             {
-                throw new Exception("Negatives Not Allowed");
+                throw new Exception($"Negatives Not Allowed || {string.Join(",", numbers.Where(x => x < 0))}");
             }
 
             return numbers.Where(x => x <= 1000).Sum();
@@ -68,7 +68,7 @@ namespace TDDKata
         public void GivenNegativeNumber_ShouldThrowNegativeNotAllowed(string input)
         {
             Action adding = () => _strCalculator.Add(input);
-            adding.Should().Throw<Exception>().Which.Message.Should().Be("Negatives Not Allowed");
+            adding.Should().Throw<Exception>().Which.Message.Should().Be("Negatives Not Allowed || -1");
         }
 
         [TestCase("1001;2", ExpectedResult = 2)]

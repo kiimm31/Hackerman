@@ -509,8 +509,8 @@ namespace PracticeHackerRank
         }
 
         [Test]
-        [TestCase("[]([][)[[)[((])(((]][()(()))])][[)]([]])", ExpectedResult = 1)]
-        [TestCase("[(?][??[", ExpectedResult = 2)]
+        //[TestCase("[]([][)[[)[((])(((]][()(()))])][[)]([]])", ExpectedResult = 1)]
+        //[TestCase("[(?][??[", ExpectedResult = 2)]
         [TestCase("?)(])?", ExpectedResult = 2)]
         public int fillMissingBrackets(string s)
         {

@@ -6,6 +6,7 @@ namespace PracticeHackerRank
     public class DatabaseTest
     {
         [Test]
+        [Ignore("wrong FP")]
         public void sqliteTest()
         {
             SQLite sQLite = new SQLite(@"C:\Users\KimHung\Documents\Test.db");
