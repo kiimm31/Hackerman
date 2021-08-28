@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ActionApi", "ActionApi\Acti
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Action.Domain", "Action.Domain\Action.Domain.csproj", "{17489108-29CA-401D-9F59-68B4F89050BC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TDDKata", "TDDKata\TDDKata.csproj", "{5D78B7DE-86B6-44D2-BD19-85B74148BEA3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TDDKata", "TDDKata\TDDKata.csproj", "{5D78B7DE-86B6-44D2-BD19-85B74148BEA3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Kata", "Kata", "{DDBC6CC1-A989-46DC-98C2-FEA0B3538179}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -48,6 +50,12 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{708355D9-B4C4-4A58-9C33-CEE888E0932E} = {DDBC6CC1-A989-46DC-98C2-FEA0B3538179}
+		{BF9EB204-8ABE-41A4-A186-4C15C80B8D8D} = {DDBC6CC1-A989-46DC-98C2-FEA0B3538179}
+		{DD4DFB6D-0D2E-4D01-96B9-88CDE79D7F59} = {DDBC6CC1-A989-46DC-98C2-FEA0B3538179}
+		{5D78B7DE-86B6-44D2-BD19-85B74148BEA3} = {DDBC6CC1-A989-46DC-98C2-FEA0B3538179}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E04D87BC-9F3D-4866-9E14-ED37350D48D1}

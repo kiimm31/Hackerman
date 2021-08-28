@@ -40,6 +40,8 @@ namespace ActionApi
                 options.UseDashboard();
             });
 
+            services.AddDistributedMemoryCache();
+
             services.AddAutoMapper(typeof(Startup));
             services.AddHostedService<QueueService>();
             services.AddHostedService<CapMonitorService>();
