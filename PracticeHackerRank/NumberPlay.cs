@@ -341,5 +341,98 @@ namespace PracticeHackerRank
 
             return returnList;
         }
+
+        [TestCase(2017, ExpectedResult = "13.09.2017")]
+        public string DateParser(int year)
+        {
+            int maxDays = 256;
+            var monthDay = GetMonthInView(year, maxDays);
+
+            return new DateTime(year, monthDay.Item1, monthDay.Item2).ToString("dd.MM.yyyy");
+        }
+
+        private (int, int) GetMonthInView(int year, int maxDay)
+        {
+            int days = 0;
+
+            for (int i = 1; i <= 12; i++)
+            {
+                var dayInMonth = DateTime.DaysInMonth(year, i);
+                days += dayInMonth;
+                if (days >= maxDay)
+                {
+                    return (i, dayInMonth - (days - maxDay));
+                }
+            }
+            return (0,0);
+        }
+
+        [TestCase(12, ExpectedResult = 2)]
+        [TestCase(1012, ExpectedResult = 3)]
+        public int findDigits(int n)
+        {
+            var digits = n.ToString().ToCharArray().Select(x => int.Parse(x.ToString()));
+
+            var returnValue = 0;
+            if (digits.Any())
+            {
+                foreach (var d in digits.Where(x => x != 0))
+                {
+                    if (n % d == 0)
+                    {
+                        returnValue++;
+                    }
+                }
+            }
+
+            return returnValue;
+        }
+
+        [TestCase("-4, 3, -9, 0, 4, 1")]
+        public void plusMinus(string arrstring)
+        {
+            var arr = arrstring.Split(',').Select(int.Parse).ToList();
+            var i = ((float)((float)arr.Count(x => x > 0) / (float)arr.Count())).ToString("0.000000");
+            var j = ((float)((float)arr.Count(x => x < 0) / (float)arr.Count())).ToString("0.000000");
+            var k = ((float)((float)arr.Count(x => x == 0) / (float)arr.Count())).ToString("0.000000");
+            Console.WriteLine(i);
+            Console.WriteLine(j);
+            Console.WriteLine(k);
+        }
+
+        public int birthdayCakeCandles(List<int> candles)
+        {
+            var max = candles.Max();
+            return candles.Count(x => x == max);
+        }
+
+        [Test]
+        public void GetIntegersFromList()
+        {
+            List<object> listOfItems = new List<object>() { 1, 2, "a", "b", "aasf", "1", "123", 231 };
+            var iu = listOfItems.Where(x => x.GetType() == typeof(int)).Select(x => int.Parse(x.ToString())).ToList();
+        }
+
+        [Test]
+        public void OpenOrSenior()
+        {
+
+            int[][] data = new[] { new[] { 45, 12 }, new[] { 55, 21 }, new[] { 19, 2 }, new[] { 104, 20 } };
+
+            var returnClass = new List<string>();
+            foreach (var person in data)
+            {
+                var age = person.First();
+                var hdp = person.Last();
+
+                if (age >= 55 && hdp > 7)
+                {
+                    returnClass.Add("Senior");
+                }
+                else
+                    returnClass.Add("Open");
+
+            }
+        }
     }
 }

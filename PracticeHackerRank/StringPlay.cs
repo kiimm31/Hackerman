@@ -610,5 +610,58 @@ namespace PracticeHackerRank
 
             return "YES";
         }
+
+
+        [TestCase("07:05:45PM", ExpectedResult = "19:05:45")]
+        [TestCase("12:05:45AM", ExpectedResult = "00:05:45")]
+        [TestCase("12:05:45PM", ExpectedResult = "12:05:45")]
+        public string timeConversion(string s)
+        {
+            var ampm = s.Substring(8, 2);
+            var timeStr = s.Substring(0, 8).Split(':').ToList();
+            var hour = 0;
+            if (ampm.ToUpper() == "AM")
+            {
+                hour = int.Parse(timeStr.First()) == 12 ? 0 : int.Parse(timeStr.First());
+            }
+            else
+            {
+                hour = int.Parse(timeStr.First()) == 12 ? 12 : (int.Parse(timeStr.First()) + 12) % 24;
+            }
+
+
+            timeStr.RemoveAt(0);
+            timeStr.Insert(0, hour.ToString("00"));
+
+            return string.Join(":", timeStr);
+        }
+
+        [TestCase("Indivisibilities", ExpectedResult = 2)]
+        [TestCase("aabBcde", ExpectedResult = 2)]
+        public int DuplicateCount(string str)
+        {
+            var dic = new List<char>();
+            foreach (var c in str.ToUpper())
+            {
+                if (str.ToUpper().Count(x => x == c) > 1 && !dic.Contains(c))
+                {
+                    dic.Add(c);
+                }
+            }
+            return dic.Count();
+        }
+
+        [TestCase("is2 Thi1s T4est 3a", ExpectedResult = "Thi1s is2 3a T4est")]
+        [TestCase("", ExpectedResult = "")]
+        public string Order(string words)
+        {
+            if (string.IsNullOrWhiteSpace(words))
+            {
+                return string.Empty;
+            }
+
+            return string.Join(" ", words.Split(" ").OrderBy(x => x.First(t => char.IsDigit(t))));
+
+        }
     }
 }
