@@ -1,7 +1,9 @@
 using Action.Domain;
 using ActionApi.Commands;
+using ActionApi.Extensions;
 using ActionApi.Interfaces;
 using ActionApi.Services;
+using Hangfire;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -11,9 +13,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Savorboard.CAP.InMemoryMessageQueue;
 using Serilog;
-using Hangfire;
-using Hangfire.SqlServer;
-using System;
 
 namespace ActionApi
 {
@@ -42,25 +41,9 @@ namespace ActionApi
                 options.UseInMemoryMessageQueue();
                 options.UseDashboard();
             });
-            services.AddHangfire(configuration => configuration
-        .SetDataCompatibilityLevel(CompatibilityLevel.Version_170)
-        .UseSimpleAssemblyNameTypeSerializer()
-        .UseRecommendedSerializerSettings()
-        .UseSqlServerStorage(Configuration.GetConnectionString("HangfireConnection"), new SqlServerStorageOptions
-        {
-            CommandBatchMaxTimeout = TimeSpan.FromMinutes(5),
-            SlidingInvisibilityTimeout = TimeSpan.FromMinutes(5),
-            QueuePollInterval = TimeSpan.Zero,
-            UseRecommendedIsolationLevel = true,
-            DisableGlobalLocks = true
-        }));
-
-            services.AddHangfireServer();
+        
             services.AddMvc();
             services.AddDistributedMemoryCache();
-
-            services.AddHostedService<HangfireBackgroundWorker>();
-
             services.AddAutoMapper(typeof(Startup));
             services.AddHostedService<QueueService>();
             services.AddHostedService<CapMonitorService>();
@@ -71,14 +54,12 @@ namespace ActionApi
                 b => b.MigrationsAssembly(nameof(ActionApi)))
                 , ServiceLifetime.Transient);
 
-            //services.AddHostedService<TwitchBackgroundService>();
-            //services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-            //    .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, options => Configuration.Bind("JwtSettings", options));
             services.AddHealthChecks();
+            services.AddHangFire("ActionApi", Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IBackgroundJobClient backgroundJobs, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -87,17 +68,13 @@ namespace ActionApi
 
             app.UseHttpsRedirection();
             app.UseRouting();
-
-            //app.UseAuthentication();
-
+            
             app.UseHangfireDashboard();
-            backgroundJobs.Enqueue(() => Console.WriteLine("Hello world from Hangfire!"));
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
                 endpoints.MapHangfireDashboard();
             });
-            //app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
@@ -114,6 +91,8 @@ namespace ActionApi
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
             });
+
+            app.UseHangFire();
         }
     }
 }

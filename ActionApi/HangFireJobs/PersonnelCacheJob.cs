@@ -5,14 +5,14 @@ namespace ActionApi.HangFireJobs
 {
     public class PersonnelCacheJob : IHangFireJob
     {
+        public System.Action DoWork()
+        {
+            return () => Console.Write("Easy!");
+        }
+
         public string CronExpression()
         {
             return Cron.Minutely();
-        }
-
-        System.Action IHangFireJob.DoWork()
-        {
-            return () => Console.Write("Easy!");
         }
     }
 
