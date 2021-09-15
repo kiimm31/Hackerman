@@ -663,5 +663,62 @@ namespace PracticeHackerRank
             return string.Join(" ", words.Split(" ").OrderBy(x => x.First(t => char.IsDigit(t))));
 
         }
+        [TestCase(".... . -.--   .--- ..- -.. .", ExpectedResult = "HEY JUDE")]
+        public string MorseCodeDecode(string code)
+        {
+            var decodedWord = new List<string>();
+            foreach (var word in code.Split("   "))
+            {
+                var decodedChar = new List<char>();
+                foreach (var c in word.Split(" "))
+                {
+                    decodedChar.Add(_textToMorse.Single(x => x.Value == c).Key);
+                }
+                decodedWord.Add(string.Join("", decodedChar));
+            }
+
+            return string.Join(" ", decodedWord);
+        }
+
+        private static Dictionary<char, string> _textToMorse = new Dictionary<char, string>()
+        {
+          {' ', "/"},
+          {'A', ".-"},
+          {'B', "-..."},
+          {'C', "-.-."},
+          {'D', "-.."},
+          {'E', "."},
+          {'F', "..-."},
+          {'G', "--."},
+          {'H', "...."},
+          {'I', ".."},
+          {'J', ".---"},
+          {'K', "-.-"},
+          {'L', ".-.."},
+          {'M', "--"},
+          {'N', "-."},
+          {'O', "---"},
+          {'P', ".--."},
+          {'Q', "--.-"},
+          {'R', ".-."},
+          {'S', "..."},
+          {'T', "-"},
+          {'U', "..-"},
+          {'V', "...-"},
+          {'W', ".--"},
+          {'X', "-..-"},
+          {'Y', "-.--"},
+          {'Z', "--.."},
+          {'1', ".----"},
+          {'2', "..---"},
+          {'3', "...--"},
+          {'4', "....-"},
+          {'5', "....."},
+          {'6', "-...."},
+          {'7', "--..."},
+          {'8', "---.."},
+          {'9', "----."},
+          {'0', "-----"},
+        };
     }
 }

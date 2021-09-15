@@ -364,7 +364,7 @@ namespace PracticeHackerRank
                     return (i, dayInMonth - (days - maxDay));
                 }
             }
-            return (0,0);
+            return (0, 0);
         }
 
         [TestCase(12, ExpectedResult = 2)]
@@ -433,6 +433,29 @@ namespace PracticeHackerRank
                     returnClass.Add("Open");
 
             }
+        }
+
+        [Test]
+        [TestCase(new int[] { -2, 1, -3, 4, -1, 2, 1, -5, 4 }, ExpectedResult = 6)]
+        [TestCase(new int[] { 7, 4, 11, -11, 39, 36, 10, -6, 37, -10, -32, 44, -26, -34, 43, 43 }, ExpectedResult = 155)]
+        public int MaxSequence(int[] arr)
+        {
+            if (!arr.Any())
+            {
+                return 0;
+            }
+
+            List<Tuple<int, int, int>> sumList = new List<Tuple<int, int, int>>();
+            for (int i = 0; i < arr.Length; i++)
+            {
+                for (int j = i + 1; j <= arr.Length; j++)
+                {
+                    Tuple<int, int, int> mySum = new Tuple<int, int, int>(i, j, arr.Skip(i).Take(j - i).Sum());
+                    sumList.Add(mySum);
+                }
+            }
+
+            return sumList.Max(x => x.Item3);
         }
     }
 }
