@@ -1,7 +1,9 @@
 ﻿using NUnit.Framework;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using NUnit.Framework.Internal.Execution;
 
 namespace PracticeHackerRank
 {
@@ -213,7 +215,54 @@ namespace PracticeHackerRank
 
         }
 
+        [Test]
+        public void MicronTest()
+        {
+            var fp = string.Empty;
 
+        }
+
+        private void GetSubDirectory(string fp)
+        {
+            if (!Directory.Exists(fp))
+            {
+                return;
+            }
+            foreach (var subDirectory in Directory.GetDirectories(fp))
+            {
+                GetSubDirectory(fp);
+                Console.WriteLine(subDirectory);
+            }
+        }
+
+        [TestCase("Wordbreakproblem", "this", "th", "is", "famous", "Word", "break", "b", "r", "e", "a", "k", "br", "bre", "brea", "ak", "problem")]
+        public void WordBreakProblem(string input, params string[] dicStrings)
+        {
+            var outputList = new List<string>();
+            WordBreak(input, dicStrings, string.Empty, ref outputList);
+        }
+
+        private void WordBreak(string str, string[] dict, string output, ref List<string> outputList)
+        {
+            if (str.Length == 0)
+            {
+                outputList.Add(output);
+            }
+
+            for (int i = 1; i <= str.Length; i++)
+            {
+                // consider all prefixes of the current string
+                String prefix = str.Substring(0, i);
+
+                // if the prefix is present in the dictionary, add it to the
+                // output string and recur for the remaining string
+
+                if (dict.Contains(prefix))
+                {
+                    WordBreak(str.Substring(i), dict, output + " " + prefix, ref outputList);
+                }
+            }
+        }
     }
 
 
