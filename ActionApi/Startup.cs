@@ -2,7 +2,6 @@ using Action.Domain;
 using ActionApi.Commands;
 using ActionApi.Extensions;
 using ActionApi.Interfaces;
-using ActionApi.QuartzJob;
 using ActionApi.Services;
 using Hangfire;
 using MediatR;
@@ -12,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using QuartzJob;
 using Savorboard.CAP.InMemoryMessageQueue;
 using Serilog;
 

@@ -1,8 +1,9 @@
 ﻿using Quartz;
+using QuartzLibrary.Standard.QuartzJob;
 using System;
 using System.Threading.Tasks;
 
-namespace ActionApi.QuartzJob
+namespace QuartzJob
 {
     public class HelloWorldQuartzJob : IQuartzJob
     {
@@ -14,11 +15,4 @@ namespace ActionApi.QuartzJob
             return Task.CompletedTask;
         }
     }
-
-    public interface IQuartzJob : IJob
-    {
-        public string CronExpression { get; }
-    }
-
-
 }

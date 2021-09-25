@@ -24,3 +24,5 @@
 /TDDKata/bin/Debug/netcoreapp3.1
 /ActionApi.UnitTest/ActionApi.UnitTest/obj
 /ActionApi.UnitTest/ActionApi.UnitTest/bin/Debug/netcoreapp3.1
+/QuartzLibrary.Standard/bin/Debug/netstandard2.1
+/QuartzLibrary.Standard/obj

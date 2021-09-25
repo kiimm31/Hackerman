@@ -1,11 +1,9 @@
 ﻿using ActionApi.Commands;
 using ActionApi.Helpers;
 using ActionApi.Notification;
-using ActionApi.QuartzJob;
 using ActionApi.Services;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Threading.Tasks;
 
 namespace ActionApi.Controllers

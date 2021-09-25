@@ -17,7 +17,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TDDKata", "TDDKata\TDDKata.
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Kata", "Kata", "{DDBC6CC1-A989-46DC-98C2-FEA0B3538179}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ActionApi.UnitTest", "ActionApi.UnitTest\ActionApi.UnitTest\ActionApi.UnitTest.csproj", "{F81D3B68-F9F4-4664-9A7E-E0AEC288DAD7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ActionApi.UnitTest", "ActionApi.UnitTest\ActionApi.UnitTest\ActionApi.UnitTest.csproj", "{F81D3B68-F9F4-4664-9A7E-E0AEC288DAD7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuartzLibrary.Standard", "QuartzLibrary.Standard\QuartzLibrary.Standard.csproj", "{D9763D15-EBE5-4A29-9CD3-D20E6EB5610B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,6 +55,10 @@ Global
 		{F81D3B68-F9F4-4664-9A7E-E0AEC288DAD7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F81D3B68-F9F4-4664-9A7E-E0AEC288DAD7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F81D3B68-F9F4-4664-9A7E-E0AEC288DAD7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D9763D15-EBE5-4A29-9CD3-D20E6EB5610B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9763D15-EBE5-4A29-9CD3-D20E6EB5610B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9763D15-EBE5-4A29-9CD3-D20E6EB5610B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9763D15-EBE5-4A29-9CD3-D20E6EB5610B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

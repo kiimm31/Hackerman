@@ -56,6 +56,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Action.Domain\Action.Domain.csproj" />
+    <ProjectReference Include="..\QuartzLibrary.Standard\QuartzLibrary.Standard.csproj" />
   </ItemGroup>
 
 

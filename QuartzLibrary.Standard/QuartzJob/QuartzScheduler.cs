@@ -1,12 +1,11 @@
-﻿using ActionApi.Extensions;
-using Microsoft.Extensions.DependencyInjection;
-using Quartz;
+﻿using Quartz;
 using Quartz.Impl;
+using QuartzLibrary.Standard.QuartzJob;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ActionApi.QuartzJob
+namespace QuartzJob
 {
     public class QuartzScheduler
     {
@@ -14,14 +13,14 @@ namespace ActionApi.QuartzJob
         {
             IScheduler scheduler = await StdSchedulerFactory.GetDefaultScheduler();
             await scheduler.Start();
-
-            foreach (Type mytype in System.Reflection.Assembly.GetExecutingAssembly().GetTypes()
-                   .Where(mytype => mytype.GetInterfaces().Contains(typeof(IQuartzJob))))
+            var type = typeof(IQuartzJob);
+            var types = AppDomain.CurrentDomain.GetAssemblies()
+                .SelectMany(s => s.GetTypes())
+                .Where(p => type.IsAssignableFrom(p));
+            foreach (Type mytype in types)
             {
                 //do stuff
-
                 var qJob = (IQuartzJob)Activator.CreateInstance(mytype);
-
                 IJobDetail job = JobBuilder.Create(mytype).Build();
                 ITrigger trigger = TriggerBuilder.Create()
                  .WithIdentity(mytype.Name, "IDG")
@@ -31,15 +30,6 @@ namespace ActionApi.QuartzJob
                    .Build();
                 await scheduler.ScheduleJob(job, trigger);
             }
-        }
-    }
-
-    public static class QuartzDependencyInjection
-    {
-        public static void AddQuartz(this IServiceCollection services)
-        {
-            QuartzScheduler scheduler = new QuartzScheduler();
-            _ = scheduler.Start(DateTime.Now);
         }
     }
 }
