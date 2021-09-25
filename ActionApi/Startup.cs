@@ -2,6 +2,7 @@ using Action.Domain;
 using ActionApi.Commands;
 using ActionApi.Extensions;
 using ActionApi.Interfaces;
+using ActionApi.QuartzJob;
 using ActionApi.Services;
 using Hangfire;
 using MediatR;
@@ -56,6 +57,8 @@ namespace ActionApi
 
             services.AddHealthChecks();
             services.AddHangFire("ActionApi", Configuration);
+
+            services.AddQuartz();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
