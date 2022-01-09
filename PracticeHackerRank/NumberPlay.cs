@@ -457,5 +457,30 @@ namespace PracticeHackerRank
 
             return sumList.Max(x => x.Item3);
         }
+
+
+        [Test]
+        public void CountTriplets()
+        {
+            List<long> arr = new List<long>() { 1, 3, 9, 9, 27, 81 };
+            long r = 3;
+
+            long counter = 0;
+            foreach (var l in arr.Distinct())
+            {
+                if (arr.Contains(l * r) && arr.Contains(l * r * r))
+                {
+                    var seed = 1;
+                    seed *= arr.Count(x => x == l * r);
+                    seed *= arr.Count(x => x == l * r * r);
+                    seed *= arr.Count(x => x == l );
+
+                    counter = counter + seed;
+                }
+            }
+            Assert.AreEqual(counter, 6);
+        }
+
+      
     }
 }
