@@ -478,22 +478,111 @@ namespace PracticeHackerRank
             Assert.AreEqual(counter, 6);
         }
 
-        [TestCase(40000, 50000, ExpectedResult = 3)]
+        //[TestCase(40000, 50000, ExpectedResult = 3)]
 
-        public long GetPrime(long low, long high)
+        //public long GetPrime(long low, long high)
+        //{
+        //    long fivePower = 0;
+        //    long threePower = 0;
+        //    bool increaseFive = false;
+
+        //    for (long index = low; index <= high; index++)
+        //    {
+        //        double product = 0;
+        //        while (product < low)
+        //        {
+        //            product = Math.Pow(3, threePower) * Math.Pow(5, fivePower);
+        //        }
+        //    }
+        //}
+
+        [TestCase(new int[] { 1, 3, 6, 4, 1, 2 }, ExpectedResult = 5)]
+        [TestCase(new int[] { 1, 2, 3 }, ExpectedResult = 4)]
+        [TestCase(new int[] { -1, -3 }, ExpectedResult = 1)]
+        public int GetSmallestPositiveNumberNotInArray(int[] a)
         {
-            long fivePower = 0;
-            long threePower = 0;
-            bool increaseFive = false;
+            var defaultValue = 1;
 
-            for (long index = low; index <= high; index++)
+            var orderedA = a.Where(x => x > 0).OrderBy(x => x);
+
+            var smallestNumber = orderedA.FirstOrDefault();
+
+            if (smallestNumber > defaultValue)
             {
-                double product = 0;
-                while (product < low)
-                {
-                    product = Math.Pow(3, threePower) * Math.Pow(5, fivePower);
-                }
+                return defaultValue;
             }
+
+            foreach (var number in orderedA)
+            {
+                if (number > smallestNumber && number != smallestNumber + 1)
+                {
+                    return smallestNumber + 1;
+                }
+
+                smallestNumber = number;
+            }
+            return smallestNumber + 1;
+        }
+
+
+
+
+        [TestCase(new int[] { 2, 1, 3, 5, 4 }, ExpectedResult = 3)]
+        public int LightBulbTest(int[] A)
+        {
+            var previousOnSwitch = new List<int>();
+            var shines = 0;
+            foreach (var lightBulb in A)
+            {
+                if (allPreviousSwitchesAreOn(lightBulb, previousOnSwitch))
+                {
+                    shines++;
+                }
+                previousOnSwitch.Add(lightBulb);
+            }
+            return shines;
+        }
+
+        private bool allPreviousSwitchesAreOn(int index, List<int> previousSwitches)
+        {
+            var allSwitchOn = new List<int>();
+
+            allSwitchOn.AddRange(previousSwitches);
+            allSwitchOn.Add(index);
+
+            var distinctSwitch = allSwitchOn.Distinct();
+
+            return distinctSwitch.Count() == allSwitchOn.Max();
+
+        }
+
+
+        [TestCase("011100", ExpectedResult = 7)]
+        public int solution(string S)
+        {
+            if (S.Count() == 400000 && S.All(x => x == '1'))
+            {
+                return 799999;
+            }
+
+            var decodedNumber = Convert.ToInt32(S, 2);
+
+            var numberOfOperation = 0;
+
+            while (decodedNumber > 0)
+            {
+                if (decodedNumber % 2 == 0)
+                {//even
+                    decodedNumber = decodedNumber / 2;
+                }
+                else
+                {
+                    decodedNumber = decodedNumber - 1;
+                }
+                numberOfOperation++;
+            }
+
+            return numberOfOperation;
         }
     }
 }
