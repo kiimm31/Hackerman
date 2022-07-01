@@ -466,21 +466,34 @@ namespace PracticeHackerRank
             long r = 3;
 
             long counter = 0;
-            foreach (var l in arr.Distinct())
+            foreach (var l in arr.Distinct().Where(x => arr.Contains(x * r) && arr.Contains(x * r * r)))
             {
-                if (arr.Contains(l * r) && arr.Contains(l * r * r))
-                {
-                    var seed = 1;
-                    seed *= arr.Count(x => x == l * r);
-                    seed *= arr.Count(x => x == l * r * r);
-                    seed *= arr.Count(x => x == l );
+                var seed = 1;
+                seed *= arr.Count(x => x == l * r);
+                seed *= arr.Count(x => x == l * r * r);
+                seed *= arr.Count(x => x == l);
 
-                    counter = counter + seed;
-                }
+                counter += seed;
             }
             Assert.AreEqual(counter, 6);
         }
 
-      
+        [TestCase(40000, 50000, ExpectedResult = 3)]
+
+        public long GetPrime(long low, long high)
+        {
+            long fivePower = 0;
+            long threePower = 0;
+            bool increaseFive = false;
+
+            for (long index = low; index <= high; index++)
+            {
+                double product = 0;
+                while (product < low)
+                {
+                    product = Math.Pow(3, threePower) * Math.Pow(5, fivePower);
+                }
+            }
+        }
     }
 }

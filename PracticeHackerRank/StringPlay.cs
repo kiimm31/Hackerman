@@ -720,5 +720,15 @@ namespace PracticeHackerRank
           {'9', "----."},
           {'0', "-----"},
         };
+
+
+
+
+        [Test]
+        public void test()
+        {
+
+        }
+
     }
 }
