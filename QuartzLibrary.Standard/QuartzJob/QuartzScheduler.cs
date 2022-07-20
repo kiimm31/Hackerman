@@ -1,11 +1,10 @@
-﻿using Quartz;
-using Quartz.Impl;
-using QuartzLibrary.Standard.QuartzJob;
-using System;
+﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Quartz;
+using Quartz.Impl;
 
-namespace QuartzJob
+namespace QuartzLibrary.Standard.QuartzJob
 {
     public class QuartzScheduler
     {

@@ -102,13 +102,15 @@ namespace PracticeHackerRank
         }
 
         [Test]
-        [TestCase(4, 97, 5, 97, 97, 4, 97, 4, 97, 97, 97, 97, 4, 4, 5, 5, 97, 5, 97, 99, 4, 97, 5, 97, 97, 97, 5, 5, 97, 4, 5, 97, 97, 5, 97, 4, 97, 5, 4, 4, 97, 5, 5, 5, 4, 97, 97, 4, 97, 5, 4, 4, 97, 97, 97, 5, 5, 97, 4, 97, 97, 5, 4, 97, 97, 4, 97, 97, 97, 5, 4, 4, 97, 4, 4, 97, 5, 97, 97, 97, 97, 4, 97, 5, 97, 5, 4, 97, 4, 5, 97, 97, 5, 97, 5, 97, 5, 97, 97, 97)]
+        [TestCase(
+            4, 97, 5, 97, 97, 4, 97, 4, 97, 97, 97, 97, 4, 4, 5, 5, 97, 5, 97, 99, 4, 97, 5, 97, 97, 97, 5, 5, 97, 4, 5, 97, 97, 5, 97, 4, 97, 5, 4, 4, 97, 5, 5, 5, 4, 97, 97, 4, 97, 5, 4, 4, 97, 97, 97, 5, 5, 97, 4, 97, 97, 5, 4, 97, 97,
+            4, 97, 97, 97, 5, 4, 4, 97, 4, 4, 97, 5, 97, 97, 97, 97, 4, 97, 5, 97, 5, 4, 97, 4, 5, 97, 97, 5, 97, 5, 97, 5, 97, 97, 97)]
         public void pickingNumbers(params int[] a)
         {
             var count = a
-    .Distinct()
-    .Select(o => new { Value = o, Count = a.Count(c => c == o) })
-    .OrderBy(o => o.Value);
+                .Distinct()
+                .Select(o => new { Value = o, Count = a.Count(c => c == o) })
+                .OrderBy(o => o.Value);
 
             int previousValue = count.FirstOrDefault().Value;
             int previousCount = count.FirstOrDefault().Count;
@@ -141,13 +143,18 @@ namespace PracticeHackerRank
 
         private static object[] Lane =
         {
-            new object[] { new int[][] {
-                new int[]{0,3 },
-                new int[]{4,6 },
-                new int[]{6,7 },
-                new int[]{3,5 },
-                new int[]{0,7 }
-            }, 8, new int[] { 2, 3, 1, 2, 3, 2, 3, 3 }  }
+            new object[]
+            {
+                new int[][]
+                {
+                    new int[] { 0, 3 },
+                    new int[] { 4, 6 },
+                    new int[] { 6, 7 },
+                    new int[] { 3, 5 },
+                    new int[] { 0, 7 }
+                },
+                8, new int[] { 2, 3, 1, 2, 3, 2, 3, 3 }
+            }
         };
 
         [Test, TestCaseSource(nameof(Lane))]
@@ -170,6 +177,7 @@ namespace PracticeHackerRank
 
                 returnList.Add(minValue);
             }
+
             Assert.IsNotNull(returnList);
         }
 
@@ -206,34 +214,35 @@ namespace PracticeHackerRank
 
         private static object[] containers =
         {
-            new object[] {
+            new object[]
+            {
                 new int[][]
                 {
-                    new int[]{1,1 },
-                    new int[]{1,1 }
+                    new int[] { 1, 1 },
+                    new int[] { 1, 1 }
                 }
             },
             new object[]
             {
                 new int[][]
                 {
-                    new int[]{ 999336263, 998799923 },
-                    new int[]{ 998799923, 999763019 }
+                    new int[] { 999336263, 998799923 },
+                    new int[] { 998799923, 999763019 }
                 }
             },
             new object[]
             {
                 new int[][]
                 {
-                    new int [] {993263231,806455183,972467746,761846174,226680660,667393859,815298761,790313908,997845516},
-                    new int [] {873142072,579210472,996344520,999601755,904458846,663577990,980240637,713052540,963408591},
-                    new int [] {551159221,873763794,752756532,798803609,670921889,995259612,981339960,763904498,499472207},
-                    new int [] {975980611,999974039,729219884,834636710,973988213,969888254,846967495,687204298,511348404},
-                    new int [] {993232608,998103218,857820670,995587240,817798750,773950980,824882180,797565274,887424441},
-                    new int [] {847857578,768853671,916073200,982234748,986511977,733420232,997714976,819799716,891570083},
-                    new int [] {733197334,985682497,612123868,971798655,999905357,710092446,997494889,683312998,850074746},
-                    new int [] {799093993,543648222,944524289,814951921,981087922,997222915,506561779,997697933,652807674},
-                    new int [] {989362549,973516812,891706714,786904549,982329176,376575034,993535504,984745483,777613376}
+                    new int[] { 993263231, 806455183, 972467746, 761846174, 226680660, 667393859, 815298761, 790313908, 997845516 },
+                    new int[] { 873142072, 579210472, 996344520, 999601755, 904458846, 663577990, 980240637, 713052540, 963408591 },
+                    new int[] { 551159221, 873763794, 752756532, 798803609, 670921889, 995259612, 981339960, 763904498, 499472207 },
+                    new int[] { 975980611, 999974039, 729219884, 834636710, 973988213, 969888254, 846967495, 687204298, 511348404 },
+                    new int[] { 993232608, 998103218, 857820670, 995587240, 817798750, 773950980, 824882180, 797565274, 887424441 },
+                    new int[] { 847857578, 768853671, 916073200, 982234748, 986511977, 733420232, 997714976, 819799716, 891570083 },
+                    new int[] { 733197334, 985682497, 612123868, 971798655, 999905357, 710092446, 997494889, 683312998, 850074746 },
+                    new int[] { 799093993, 543648222, 944524289, 814951921, 981087922, 997222915, 506561779, 997697933, 652807674 },
+                    new int[] { 989362549, 973516812, 891706714, 786904549, 982329176, 376575034, 993535504, 984745483, 777613376 }
                 }
             }
         };
@@ -244,19 +253,13 @@ namespace PracticeHackerRank
         {
             List<BigInteger> bigIntegers = new List<BigInteger>();
 
-            unsorted.ToList().ForEach(x =>
-            {
-                bigIntegers.Add(BigInteger.Parse(x));
-            });
+            unsorted.ToList().ForEach(x => { bigIntegers.Add(BigInteger.Parse(x)); });
 
             bigIntegers = bigIntegers.OrderBy(x => x).ToList();
 
             List<string> returnString = new List<string>();
 
-            bigIntegers.ForEach(x =>
-            {
-                returnString.Add(x.ToString());
-            });
+            bigIntegers.ForEach(x => { returnString.Add(x.ToString()); });
 
             return returnString.ToArray();
         }
@@ -283,13 +286,13 @@ namespace PracticeHackerRank
             // count ways for all values up
             // to 'N' and store the result
             for (int i = 1; i <= total; i++)
-                for (int j = 0; j < arr.Length; j++)
+            for (int j = 0; j < arr.Length; j++)
 
-                    // if i >= arr[j] then
-                    // accumulate count for value 'i' as
-                    // ways to form value 'i-arr[j]'
-                    if (i >= arr[j])
-                        count[i] += count[i - arr[j]];
+                // if i >= arr[j] then
+                // accumulate count for value 'i' as
+                // ways to form value 'i-arr[j]'
+                if (i >= arr[j])
+                    count[i] += count[i - arr[j]];
 
             // required number of ways
             return count[total];
@@ -364,6 +367,7 @@ namespace PracticeHackerRank
                     return (i, dayInMonth - (days - maxDay));
                 }
             }
+
             return (0, 0);
         }
 
@@ -416,7 +420,6 @@ namespace PracticeHackerRank
         [Test]
         public void OpenOrSenior()
         {
-
             int[][] data = new[] { new[] { 45, 12 }, new[] { 55, 21 }, new[] { 19, 2 }, new[] { 104, 20 } };
 
             var returnClass = new List<string>();
@@ -431,7 +434,6 @@ namespace PracticeHackerRank
                 }
                 else
                     returnClass.Add("Open");
-
             }
         }
 
@@ -584,5 +586,100 @@ namespace PracticeHackerRank
 
             return numberOfOperation;
         }
+
+
+        [TestCase(new int[] { 1, 2, 3, 4, 5 }, ExpectedResult = true)]
+        [TestCase(new int[] { 1, 2, 3, 5 }, ExpectedResult = false)]
+        [TestCase(new int[] { 5, 4, 3, 2, 1 }, ExpectedResult = true)]
+        public bool ArrayIsConsecutive(int[] arr)
+        {
+            var isAscending = CheckArrayIsConsecutiveAscendingOrder(arr);
+
+            if (isAscending)
+            {
+                return true;
+            }
+
+            var revArry = arr.Reverse();
+
+            var isDecending = CheckArrayIsConsecutiveAscendingOrder(revArry);
+
+            return isDecending;
+        }
+
+        private bool CheckArrayIsConsecutiveAscendingOrder(IEnumerable<int> arr)
+        {
+            var previousInt = arr.First();
+
+            for (var i = 1; i < arr.Count(); i++)
+            {
+                // 2nd number to end
+                var myInt = arr.ElementAtOrDefault(i);
+                if (previousInt + 1 == myInt)
+                {
+                    previousInt = myInt;
+                    continue;
+                }
+
+                return false;
+            }
+
+            return true;
+        }
+
+
+        [Test]
+        public void FindSum()
+        {
+            var sumTo = 10;
+
+            var listOfPairs = new List<Tuple<PairsOutput, PairsOutput>>();
+
+            var givenList = new List<int> { 1, 2, 5, 9, 8, 9, 5, 4, 6, 2 };
+            // var givenList = new List<int> { 1, 2, 9, 8, 9 };
+
+            var cloneList = new List<int>();
+            cloneList.AddRange(givenList);
+
+            foreach (var cloneInt in cloneList)
+            {
+                var counterPart = sumTo - cloneInt;
+
+                if (givenList.Contains(counterPart) && givenList.Contains(cloneInt))
+                {
+                    var index = cloneList.IndexOf(counterPart);
+                    var intPart1 = new PairsOutput()
+                    {
+                        Position = cloneList.IndexOf(cloneInt),
+                        Value = cloneInt
+                    };
+
+                    var intCountPart = new PairsOutput()
+                    {
+                        Position = cloneList.IndexOf(counterPart),
+                        Value = counterPart
+                    };
+
+                    var outputPair = new Tuple<PairsOutput, PairsOutput>(intPart1, intCountPart);
+                    listOfPairs.Add(outputPair);
+                    // remove from givenlist
+
+                    givenList.Remove(cloneInt);
+                    givenList.Remove(counterPart);
+
+                    if (givenList.Count() == 1)
+                    {
+                        break;
+                    }
+                }
+            }
+            var count = listOfPairs.Count();
+        }
+    }
+
+    public class PairsOutput
+    {
+        public int Position { get; set; }
+        public int Value { get; set; }
     }
 }

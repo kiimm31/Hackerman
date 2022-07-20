@@ -1,7 +1,7 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using System;
+﻿using System;
+using Microsoft.Extensions.DependencyInjection;
 
-namespace QuartzJob
+namespace QuartzLibrary.Standard.QuartzJob
 {
     public static class QuartzDependencyInjection
     {

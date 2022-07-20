@@ -12,6 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using QuartzJob;
+using QuartzLibrary.Standard.QuartzJob;
 using Savorboard.CAP.InMemoryMessageQueue;
 using Serilog;
 
