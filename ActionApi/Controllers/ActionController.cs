@@ -14,12 +14,16 @@ namespace ActionApi.Controllers
     {
         private readonly CapPublishService _capPublisher;
         private readonly IMediator _mediator;
+        private readonly IHttpHelper _httpHelper;
 
-        public ActionController(IMediator mediator, CapPublishService capPublisher)
+
+        public ActionController(IMediator mediator, CapPublishService capPublisher, IHttpHelper httpHelper)
         {
             _mediator = mediator;
             _capPublisher = capPublisher;
+            _httpHelper = httpHelper;
         }
+
 
         [HttpPost]
         [Route("Fuzzy")]
@@ -76,7 +80,7 @@ namespace ActionApi.Controllers
         [Route("TryGet")]
         public async Task<IActionResult> TryGet(string address)
         {
-            var response = await HttpHelper.GetAsync(new System.Uri(address));
+            var response = await _httpHelper.GetAsync(new System.Uri(address));
 
             return Ok(response);
         }
@@ -85,7 +89,7 @@ namespace ActionApi.Controllers
         [Route("TryPost")]
         public async Task<IActionResult> TryPost(string address)
         {
-            var response = await HttpHelper.PostAsync<string>(null, new System.Uri(address));
+            var response = await _httpHelper.PostAsync<string>(null, new System.Uri(address));
             return Ok(response);
         }
     }

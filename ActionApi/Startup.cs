@@ -1,6 +1,7 @@
 using Action.Domain;
 using ActionApi.Commands;
 using ActionApi.Extensions;
+using ActionApi.Helpers;
 using ActionApi.Interfaces;
 using ActionApi.Services;
 using Hangfire;
@@ -31,7 +32,7 @@ namespace ActionApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddHttpClient();
+            services.AddHttpClient<IHttpHelper>();
             services.AddMediatR(typeof(Startup));
             services.AddSwaggerGen();
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingCommand<,>));
@@ -51,6 +52,7 @@ namespace ActionApi
             services.AddHostedService<CapMonitorService>();
             services.AddSingleton<IEventQueue, EventQueue>();
             services.AddSingleton<CapPublishService>();
+            services.AddTransient<IHttpHelper, HttpHelper>();
             services.AddDbContext<ActionContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"),
                 b => b.MigrationsAssembly(nameof(ActionApi)))

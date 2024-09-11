@@ -1,30 +1,34 @@
 ﻿using Newtonsoft.Json;
-using RestSharp;
 using System;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace ActionApi.Helpers
 {
-    public static class HttpHelper
+    public class HttpHelper : IHttpHelper
     {
-        public static async Task<T> PostAsync<T>(object payload, Uri address)
+        private readonly HttpClient _httpClient;
+
+        public HttpHelper(HttpClient httpClient)
         {
-            var client = new RestClient(address.AbsoluteUri);
-            var request = new RestRequest(Method.POST);
-            request.AddJsonBody(payload);
-
-            var response = await client.ExecuteAsync(request);
-
-            return JsonConvert.DeserializeObject<T>(response.Content);
+            _httpClient = httpClient;
         }
 
-        public static async Task<string> GetAsync(Uri address)
+        public async Task<T> PostAsync<T>(object payload, Uri address)
         {
-            var client = new RestClient(address.AbsoluteUri);
-            var request = new RestRequest(Method.GET);
-            var response = await client.ExecuteAsync(request);
+            var response = await _httpClient.PostAsJsonAsync(address, payload);
+            var content = await response.Content.ReadAsStringAsync();
 
-            return response.Content;
+            return JsonConvert.DeserializeObject<T>(content);
+        }
+
+        public async Task<string> GetAsync(Uri address)
+        {
+            var response = await _httpClient.GetAsync(address);
+
+            var content = await response.Content.ReadAsStringAsync();
+
+            return content;
         }
     }
 }
