@@ -22,6 +22,7 @@ namespace PracticeHackerRank.Titansoft
                 }
             }
 
+
             return maxProfit;
         }
 
