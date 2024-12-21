@@ -21,6 +21,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ActionApi.UnitTest", "Actio
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuartzLibrary.Standard", "QuartzLibrary.Standard\QuartzLibrary.Standard.csproj", "{D9763D15-EBE5-4A29-9CD3-D20E6EB5610B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StarForcing", "StarForcing\StarForcing.csproj", "{D1669757-9F33-48BC-AA3C-445C98EF4E7C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -59,6 +61,10 @@ Global
 		{D9763D15-EBE5-4A29-9CD3-D20E6EB5610B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D9763D15-EBE5-4A29-9CD3-D20E6EB5610B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D9763D15-EBE5-4A29-9CD3-D20E6EB5610B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D1669757-9F33-48BC-AA3C-445C98EF4E7C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D1669757-9F33-48BC-AA3C-445C98EF4E7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D1669757-9F33-48BC-AA3C-445C98EF4E7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D1669757-9F33-48BC-AA3C-445C98EF4E7C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -68,6 +74,7 @@ Global
 		{BF9EB204-8ABE-41A4-A186-4C15C80B8D8D} = {DDBC6CC1-A989-46DC-98C2-FEA0B3538179}
 		{DD4DFB6D-0D2E-4D01-96B9-88CDE79D7F59} = {DDBC6CC1-A989-46DC-98C2-FEA0B3538179}
 		{5D78B7DE-86B6-44D2-BD19-85B74148BEA3} = {DDBC6CC1-A989-46DC-98C2-FEA0B3538179}
+		{D1669757-9F33-48BC-AA3C-445C98EF4E7C} = {DDBC6CC1-A989-46DC-98C2-FEA0B3538179}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E04D87BC-9F3D-4866-9E14-ED37350D48D1}

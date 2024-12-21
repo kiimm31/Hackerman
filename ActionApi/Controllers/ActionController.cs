@@ -10,26 +10,14 @@ namespace ActionApi.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class ActionController : ControllerBase
+    public class ActionController(IMediator mediator, CapPublishService capPublisher, IHttpHelper httpHelper)
+        : ControllerBase
     {
-        private readonly CapPublishService _capPublisher;
-        private readonly IMediator _mediator;
-        private readonly IHttpHelper _httpHelper;
-
-
-        public ActionController(IMediator mediator, CapPublishService capPublisher, IHttpHelper httpHelper)
-        {
-            _mediator = mediator;
-            _capPublisher = capPublisher;
-            _httpHelper = httpHelper;
-        }
-
-
         [HttpPost]
         [Route("Fuzzy")]
         public async Task<int> Fuzzy(FuzzyStringComparisonCommand command)
         {
-            var result = await _mediator.Send(command);
+            var result = await mediator.Send(command);
 
             return result.IsSuccess ? result.Value : 0;
         }
@@ -38,7 +26,7 @@ namespace ActionApi.Controllers
         [Route("Random")]
         public async Task<string> GetRandomStringAsync()
         {
-            var result = await _mediator.Send(new GetRandomNumberCommand());
+            var result = await mediator.Send(new GetRandomNumberCommand());
             return result.IsSuccess ? $"RandomString : {result.Value}" : $"ERROR : {result.Error}";
         }
 
@@ -46,7 +34,7 @@ namespace ActionApi.Controllers
         [Route("OCR")]
         public async Task<string> OcrTask(PerformOcrCommand request)
         {
-            var result = await _mediator.Send(request);
+            var result = await mediator.Send(request);
 
             return result.IsSuccess ? result.Value : result.Error;
         }
@@ -55,7 +43,7 @@ namespace ActionApi.Controllers
         [Route("CAP")]
         public async Task<bool> PublishEvent(QueueEventCommand eventRequest)
         {
-            await _capPublisher.PublishAsync(eventRequest.Event);
+            await capPublisher.PublishAsync(eventRequest.Event);
 
             return true;
         }
@@ -64,7 +52,7 @@ namespace ActionApi.Controllers
         [Route("Queue")]
         public async Task<bool> QueueEvent(QueueEventCommand eventRequest)
         {
-            var result = await _mediator.Send(eventRequest);
+            var result = await mediator.Send(eventRequest);
             return result.IsSuccess;
         }
 
@@ -72,7 +60,7 @@ namespace ActionApi.Controllers
         [Route("Notify")]
         public async Task<bool> SendNotificationAsync(NotifyRequest request)
         {
-            await _mediator.Publish(request);
+            await mediator.Publish(request);
             return true;
         }
 
@@ -80,7 +68,7 @@ namespace ActionApi.Controllers
         [Route("TryGet")]
         public async Task<IActionResult> TryGet(string address)
         {
-            var response = await _httpHelper.GetAsync(new System.Uri(address));
+            var response = await httpHelper.GetAsync(new System.Uri(address));
 
             return Ok(response);
         }
@@ -89,7 +77,7 @@ namespace ActionApi.Controllers
         [Route("TryPost")]
         public async Task<IActionResult> TryPost(string address)
         {
-            var response = await _httpHelper.PostAsync<string>(null, new System.Uri(address));
+            var response = await httpHelper.PostAsync<string>(null, new System.Uri(address));
             return Ok(response);
         }
     }

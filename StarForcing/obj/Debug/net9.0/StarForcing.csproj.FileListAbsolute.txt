@@ -1,0 +1,15 @@
+C:\Users\kim31\source\repos\kiimm31\Hackerman\StarForcing\bin\Debug\net9.0\StarForcing.exe
+C:\Users\kim31\source\repos\kiimm31\Hackerman\StarForcing\bin\Debug\net9.0\StarForcing.deps.json
+C:\Users\kim31\source\repos\kiimm31\Hackerman\StarForcing\bin\Debug\net9.0\StarForcing.runtimeconfig.json
+C:\Users\kim31\source\repos\kiimm31\Hackerman\StarForcing\bin\Debug\net9.0\StarForcing.dll
+C:\Users\kim31\source\repos\kiimm31\Hackerman\StarForcing\bin\Debug\net9.0\StarForcing.pdb
+C:\Users\kim31\source\repos\kiimm31\Hackerman\StarForcing\obj\Debug\net9.0\StarForcing.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\kim31\source\repos\kiimm31\Hackerman\StarForcing\obj\Debug\net9.0\StarForcing.AssemblyInfoInputs.cache
+C:\Users\kim31\source\repos\kiimm31\Hackerman\StarForcing\obj\Debug\net9.0\StarForcing.AssemblyInfo.cs
+C:\Users\kim31\source\repos\kiimm31\Hackerman\StarForcing\obj\Debug\net9.0\StarForcing.csproj.CoreCompileInputs.cache
+C:\Users\kim31\source\repos\kiimm31\Hackerman\StarForcing\obj\Debug\net9.0\StarForcing.sourcelink.json
+C:\Users\kim31\source\repos\kiimm31\Hackerman\StarForcing\obj\Debug\net9.0\StarForcing.dll
+C:\Users\kim31\source\repos\kiimm31\Hackerman\StarForcing\obj\Debug\net9.0\refint\StarForcing.dll
+C:\Users\kim31\source\repos\kiimm31\Hackerman\StarForcing\obj\Debug\net9.0\StarForcing.pdb
+C:\Users\kim31\source\repos\kiimm31\Hackerman\StarForcing\obj\Debug\net9.0\StarForcing.genruntimeconfig.cache
+C:\Users\kim31\source\repos\kiimm31\Hackerman\StarForcing\obj\Debug\net9.0\ref\StarForcing.dll
